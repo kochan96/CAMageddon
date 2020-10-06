@@ -1,8 +1,11 @@
 #include <iostream>
+#include "CAMApplication/CAMApplication.h"
 
 int main()
 {
-	std::cout << "Hello World" << std::endl;
+	CAMageddon::CAMApplication app;
+	app.Init();
+	app.Run();
 
 	return EXIT_SUCCESS;
 }

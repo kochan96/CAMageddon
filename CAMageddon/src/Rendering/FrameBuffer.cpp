@@ -1,7 +1,7 @@
 #include "campch.h"
 #include "FrameBuffer.h"
 
-#include <glad\glad.h>
+#include <glad/glad.h>
 
 namespace CAMageddon
 {

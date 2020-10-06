@@ -1,8 +1,9 @@
 #pragma once
 #include "Window.h"
 #include "LayerStack.h"
-#include "Events\Event.h"
-#include "Events\ApplicationEvent.h"
+#include "Events/Event.h"
+#include "Events/ApplicationEvent.h"
+#include "ImGui/ImGuiLayer.h"
 
 namespace CAMageddon
 {
@@ -10,14 +11,14 @@ namespace CAMageddon
     {
     public:
         Application();
-        ~Application();
+        virtual ~Application();
 
         void OnEvent(Event& e);
 
         void PushLayer(Layer* layer);
         void PushOverlay(Layer* layer);
 
-        void Init();
+        virtual void Init();
         void Run();
 
         void Close();
@@ -39,5 +40,6 @@ namespace CAMageddon
         std::unique_ptr<Window> m_window;
 
         LayerStack m_LayerStack;
+        ImGuiLayer* m_ImGuiLayer;
     };
 }

@@ -1,9 +1,9 @@
 #pragma once
 #include "Camera.h"
-#include "Core\Timestep.h"
+#include "Core/Timestep.h"
 
-#include "Events\MouseEvent.h"
-#include "Events\ApplicationEvent.h"
+#include "Events/MouseEvent.h"
+#include "Events/ApplicationEvent.h"
 
 namespace CAMageddon
 {

@@ -1,11 +1,9 @@
 #pragma once
 #include <memory>
-#include <spdlog\spdlog.h>
+#include <spdlog/spdlog.h>
 
 namespace CAMageddon
 {
-
-
     class Logger
     {
     public:
@@ -17,11 +15,11 @@ namespace CAMageddon
     };
 
 
-#define LOG_TRACE(...)     SPDLOG_LOGGER_TRACE(Logger::getAppLogger(),__VA_ARGS__)
-#define LOG_INFO(...)      SPDLOG_LOGGER_INFO(Logger::getAppLogger(),__VA_ARGS__)
-#define LOG_WARNING(...)   SPDLOG_LOGGER_WARN(Logger::getAppLogger(),__VA_ARGS__)
-#define LOG_ERROR(...)     SPDLOG_LOGGER_ERROR(Logger::getAppLogger(),__VA_ARGS__)
-#define LOG_CRITITCAL(...) SPDLOG_LOGGER_CRITICAL(Logger::getAppLogger(),__VA_ARGS__)
+#define LOG_TRACE(...)     CAMageddon::Logger::getAppLogger()->trace(__VA_ARGS__)
+#define LOG_INFO(...)      CAMageddon::Logger::getAppLogger()->info(__VA_ARGS__)
+#define LOG_WARNING(...)   CAMageddon::Logger::getAppLogger()->warn(__VA_ARGS__)
+#define LOG_ERROR(...)     CAMageddon::Logger::getAppLogger()->error(__VA_ARGS__)
+#define LOG_CRITITCAL(...) CAMageddon::Logger::getAppLogger()->critical(__VA_ARGS__)
 
 #define LOG_ASSERT(x,...) if(!x){ LOG_ERROR(__VA_ARGS__); __debugbreak;}
 

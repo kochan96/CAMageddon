@@ -286,19 +286,4 @@ namespace CAMageddon {
         GLint location = glGetUniformLocation(m_RendererID, name.c_str());
         glUniform3fv(location, count, &values[0].x);
     }
-
-    Ref<OpenGLShader> ShaderLibrary::Load(const std::string& name, const std::string& filepath)
-    {
-        //TODO error checking e.g. no duplicate load
-        auto shader = CreateRef<OpenGLShader>(filepath);
-        m_Shaders.insert({ name,shader });
-        return shader;
-    }
-
-    Ref<OpenGLShader> ShaderLibrary::Get(const std::string& name)
-    {
-        //TODO check if exists
-        return m_Shaders[name];
-    }
-
 }

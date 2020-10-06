@@ -3,6 +3,7 @@
 #include "Base.h"
 #include "Timestep.h"
 #include "Events/Event.h"
+#include "Rendering/Shader.h"
 
 
 namespace CAMageddon

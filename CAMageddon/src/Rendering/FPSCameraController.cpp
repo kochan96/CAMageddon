@@ -4,9 +4,9 @@
 #include "Core/Input.h"
 #include "Core/KeyCodes.h"
 
-#include "Core\Base.h"
+#include "Core/Base.h"
 
-#include <glm\gtx\rotate_vector.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 
 namespace CAMageddon
 {
@@ -46,35 +46,35 @@ namespace CAMageddon
     void FPSCameraController::OnUpdate(Timestep ts)
     {
         float translationSpeed = m_CameraTranslationSpeed;
-        if (Input::IsKeyPressed(CDM_KEY_LEFT_SHIFT))
+        if (Input::IsKeyPressed(CAM_KEY_LEFT_SHIFT))
         {
             translationSpeed *= 10;
         }
 
 
-        if (Input::IsKeyPressed(CDM_KEY_A))
+        if (Input::IsKeyPressed(CAM_KEY_A))
         {
             m_CameraPosition -= GetCameraRight() * (translationSpeed * ts);
         }
-        else if (Input::IsKeyPressed(CDM_KEY_D))
+        else if (Input::IsKeyPressed(CAM_KEY_D))
         {
             m_CameraPosition += GetCameraRight() * (translationSpeed * ts);
         }
 
-        if (Input::IsKeyPressed(CDM_KEY_W))
+        if (Input::IsKeyPressed(CAM_KEY_W))
         {
             m_CameraPosition += GetCameraFront() * (translationSpeed * ts);
         }
-        else if (Input::IsKeyPressed(CDM_KEY_S))
+        else if (Input::IsKeyPressed(CAM_KEY_S))
         {
             m_CameraPosition -= GetCameraFront() * (translationSpeed * ts);
         }
 
-        if (Input::IsKeyPressed(CDM_KEY_Q))
+        if (Input::IsKeyPressed(CAM_KEY_Q))
         {
             m_CameraPosition += GetCameraUp() * (translationSpeed * ts);
         }
-        else if (Input::IsKeyPressed(CDM_KEY_E))
+        else if (Input::IsKeyPressed(CAM_KEY_E))
         {
             m_CameraPosition -= GetCameraUp() * (translationSpeed * ts);
         }
@@ -88,7 +88,7 @@ namespace CAMageddon
     {
         auto [mousePosX, mousePosY] = Input::GetMousePosition();
 
-        if (Input::IsMouseButtonPressed(CDM_MOUSE_BUTTON_RIGHT))
+        if (Input::IsMouseButtonPressed(CAM_MOUSE_BUTTON_RIGHT))
         {
             m_CameraRotation.x -= (mousePosY - lastMousePos.y) * m_CameraRotationSpeed * ts;
             m_CameraRotation.y -= (mousePosX - lastMousePos.x) * m_CameraRotationSpeed * ts;

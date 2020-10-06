@@ -1,6 +1,6 @@
 #pragma once
 #include "campch.h"
-#include <glm\glm.hpp>
+#include <glm/glm.hpp>
 #include "Core/Base.h"
 
 typedef unsigned int GLenum;
@@ -46,15 +46,5 @@ namespace CAMageddon
     private:
         uint32_t m_RendererID;
         std::string m_Name;
-    };
-
-    class ShaderLibrary
-    {
-    public:
-        Ref<OpenGLShader> Load(const std::string& name, const std::string& filepath);
-        Ref<OpenGLShader> Get(const std::string& name);
-
-    private:
-        std::unordered_map<std::string, Ref<OpenGLShader>> m_Shaders;
     };
 }

@@ -3,7 +3,7 @@
 #include "MouseCode.h"
 
 #include "Application.h"
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 
 namespace CAMageddon
 {

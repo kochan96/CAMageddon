@@ -26,7 +26,11 @@ namespace CAMageddon
         WindowProps windowData("Hello Window");
 
         m_window->Init(windowData);
+        m_window->SetVSync(true);
         m_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+        m_ImGuiLayer = new ImGuiLayer("ImGui");
+        PushOverlay(m_ImGuiLayer);
     }
 
     void Application::OnEvent(Event& e)
@@ -74,10 +78,8 @@ namespace CAMageddon
 
                 m_ImGuiLayer->Begin();
                 {
-                    HZ_PROFILE_SCOPE("LayerStack OnImGuiRender");
-
                     for (Layer* layer : m_LayerStack)
-                        layer->OnImGuiRender();
+                        layer->OnRenderImGui();
                 }
                 m_ImGuiLayer->End();
             }
@@ -107,10 +109,8 @@ namespace CAMageddon
         }
 
         m_Minimized = false;
-        Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
-
+        //Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
         glViewport(0, 0, e.GetWidth(), e.GetHeight());
-        //m_openGlManager->setViewPort(e.GetWidth(), e.GetHeight());
 
         return false;
     }

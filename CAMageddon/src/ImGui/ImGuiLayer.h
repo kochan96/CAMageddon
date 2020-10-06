@@ -1,6 +1,6 @@
 #pragma once
 #include "campch.h"
-#include "Core\Layer.h"
+#include "Core/Layer.h"
 
 namespace CAMageddon
 {
@@ -18,6 +18,8 @@ namespace CAMageddon
 		virtual void OnDetach() override;
 		virtual void OnRenderImGui() override;
 	private:
+		void InitImGuiStyle();
+
 		float m_Time = 0.0f;
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core\Base.h"
+#include "Core/Base.h"
+#include <glm/glm.hpp>
 
 namespace CAMageddon
 {
@@ -8,7 +9,7 @@ namespace CAMageddon
     {
         uint32_t Width, Height;
         uint32_t Samples = 1;
-
+        glm::vec4 ClearColor = glm::vec4(0.0f,0.0f,0.0f,1.0f);
         bool SwapChainTarget = false;
     };
 

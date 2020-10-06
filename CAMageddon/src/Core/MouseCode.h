@@ -27,15 +27,15 @@ namespace CAMageddon
 	}
 }
 
-#define CDM_MOUSE_BUTTON_0      ::CAMageddon::Mouse::Button0
-#define CDM_MOUSE_BUTTON_1      ::CAMageddon::Mouse::Button1
-#define CDM_MOUSE_BUTTON_2      ::CAMageddon::Mouse::Button2
-#define CDM_MOUSE_BUTTON_3      ::CAMageddon::Mouse::Button3
-#define CDM_MOUSE_BUTTON_4      ::CAMageddon::Mouse::Button4
-#define CDM_MOUSE_BUTTON_5      ::CAMageddon::Mouse::Button5
-#define CDM_MOUSE_BUTTON_6      ::CAMageddon::Mouse::Button6
-#define CDM_MOUSE_BUTTON_7      ::CAMageddon::Mouse::Button7
-#define CDM_MOUSE_BUTTON_LAST   ::CAMageddon::Mouse::ButtonLast
-#define CDM_MOUSE_BUTTON_LEFT   ::CAMageddon::Mouse::ButtonLeft
-#define CDM_MOUSE_BUTTON_RIGHT  ::CAMageddon::Mouse::ButtonRight
-#define CDM_MOUSE_BUTTON_MIDDLE ::CAMageddon::Mouse::ButtonMiddle
+#define CAM_MOUSE_BUTTON_0      ::CAMageddon::Mouse::Button0
+#define CAM_MOUSE_BUTTON_1      ::CAMageddon::Mouse::Button1
+#define CAM_MOUSE_BUTTON_2      ::CAMageddon::Mouse::Button2
+#define CAM_MOUSE_BUTTON_3      ::CAMageddon::Mouse::Button3
+#define CAM_MOUSE_BUTTON_4      ::CAMageddon::Mouse::Button4
+#define CAM_MOUSE_BUTTON_5      ::CAMageddon::Mouse::Button5
+#define CAM_MOUSE_BUTTON_6      ::CAMageddon::Mouse::Button6
+#define CAM_MOUSE_BUTTON_7      ::CAMageddon::Mouse::Button7
+#define CAM_MOUSE_BUTTON_LAST   ::CAMageddon::Mouse::ButtonLast
+#define CAM_MOUSE_BUTTON_LEFT   ::CAMageddon::Mouse::ButtonLeft
+#define CAM_MOUSE_BUTTON_RIGHT  ::CAMageddon::Mouse::ButtonRight
+#define CAM_MOUSE_BUTTON_MIDDLE ::CAMageddon::Mouse::ButtonMiddle
