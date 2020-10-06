@@ -21,7 +21,8 @@ namespace CAMageddon
 		void RenderViewport();
 
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
-		Ref<OpenGLFramebuffer> m_Framebuffer;
+		Ref<OpenGLFramebuffer> m_MsoFramebuffer;
+		Ref<OpenGLFramebuffer> m_ViewportFramebuffer;
 		Scope<FPSCameraController> m_CameraController;
 	};
 }

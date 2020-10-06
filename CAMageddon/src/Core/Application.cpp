@@ -17,7 +17,7 @@ namespace CAMageddon
 
     Application::~Application()
     {
-
+        m_ImGuiLayer->Shutdown();
     }
 
     void Application::Init()
@@ -30,7 +30,7 @@ namespace CAMageddon
         m_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
         m_ImGuiLayer = new ImGuiLayer("ImGui");
-        PushOverlay(m_ImGuiLayer);
+        m_ImGuiLayer->Init();
     }
 
     void Application::OnEvent(Event& e)

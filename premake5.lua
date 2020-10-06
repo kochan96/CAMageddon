@@ -16,6 +16,7 @@ IncludeDir["Glad"] = "CAMageddon/vendor/glad/include"
 IncludeDir["ImGui"] = "CAMageddon/vendor/imgui"
 IncludeDir["glm"] = "CAMageddon/vendor/glm"
 IncludeDir["spdlog"] = "CAMageddon/vendor/spdlog"
+IncludeDir["tinygiledialogs"] = "CAMageddon/vendor/tinyfiledialogs"
 
 group "Dependencies"
     include "CAMageddon/vendor/glfw"
@@ -54,6 +55,7 @@ project "CAMageddon"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
+        "%{IncludeDir.tinygiledialogs}"
     }
 
     links 

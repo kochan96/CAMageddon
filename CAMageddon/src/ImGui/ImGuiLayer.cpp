@@ -27,7 +27,7 @@ namespace CAMageddon {
 
 	}
 
-	void ImGuiLayer::OnAttach()
+	void ImGuiLayer::Init()
 	{
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
@@ -60,7 +60,7 @@ namespace CAMageddon {
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
-	void ImGuiLayer::OnDetach()
+	void ImGuiLayer::Shutdown()
 	{
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
@@ -137,10 +137,6 @@ namespace CAMageddon {
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(backup_current_context);
 		}
-	}
-
-	void ImGuiLayer::OnRenderImGui()
-	{
 	}
 
 	void ImGuiLayer::InitImGuiStyle()

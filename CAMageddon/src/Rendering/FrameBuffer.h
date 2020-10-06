@@ -22,6 +22,8 @@ namespace CAMageddon
 
         void Invalidate();
 
+        void BindRead();
+        void BindDraw();
         void Bind();
         void UnBind();
 

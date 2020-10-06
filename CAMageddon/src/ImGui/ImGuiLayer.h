@@ -1,10 +1,9 @@
 #pragma once
 #include "campch.h"
-#include "Core/Layer.h"
 
 namespace CAMageddon
 {
-	class ImGuiLayer : public Layer
+	class ImGuiLayer
 	{
 	public:
 		ImGuiLayer();
@@ -14,12 +13,9 @@ namespace CAMageddon
 		void Begin();
 		void End();
 
-		virtual void OnAttach() override;
-		virtual void OnDetach() override;
-		virtual void OnRenderImGui() override;
+		virtual void Init();
+		virtual void Shutdown();
 	private:
 		void InitImGuiStyle();
-
-		float m_Time = 0.0f;
 	};
 }
