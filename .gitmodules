@@ -1,0 +1,9 @@
+[submodule "CAMageddon/vendors/glfw"]
+	path = CAMageddon/vendors/glfw
+	url = https://github.com/kochan96/glfw.git
+[submodule "CAMageddon/vendors/imgui"]
+	path = CAMageddon/vendors/imgui
+	url = https://github.com/kochan96/imgui.git
+[submodule "CAMageddon/vendors/glm"]
+	path = CAMageddon/vendors/glm
+	url = https://github.com/g-truc/glm.git
