@@ -1,25 +1,20 @@
 #include "AppLayer.h"
 #include "imgui.h"
-#include "Rendering/ShaderLibrary.h"
-#include "Rendering/VertexArray.h"
 #include "glad/glad.h"
-
 #include "Core/Application.h"
+
 
 namespace CAMageddon
 {
-	const std::string FlatColorShaderPath = "assets/shaders/FlatColorShader.glsl";
-	const std::string FlatColorShaderName = "FlatColorShader";
-
 	AppLayer::AppLayer() : Layer() {}
 	AppLayer::AppLayer(const std::string& name) : Layer(name) {}
 
 	void AppLayer::OnAttach()
 	{
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_DEPTH_TEST);
 
-		ShaderLibrary::Get().Load(FlatColorShaderName, FlatColorShaderPath);
 		auto& window = Application::Get().GetMainWindow();
 		float aspectRatio = window.GetWidth() / window.GetHeight();
 		const float fov = 45.0f;
@@ -37,6 +32,9 @@ namespace CAMageddon
 		fbSpec.Width = window.GetWidth();
 		fbSpec.Height = window.GetHeight();
 		m_ViewportFramebuffer = CreateRef< OpenGLFramebuffer>(fbSpec);
+
+		m_Scene = CreateScope<Scene>(m_CameraController->GetCamera());
+		m_Scene->Init();
 	}
 
 	void AppLayer::OnDetach()
@@ -56,45 +54,28 @@ namespace CAMageddon
 		}
 
 		m_CameraController->OnUpdate(ts);
+		m_Scene->Update(ts);
 
 		m_MsoFramebuffer->Bind();
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		float triangle[] = {
-			-1.0f,0.0f,0.0f,
-			1.0f,0.0f,0.0f,
-			0.0f,1.0f,0.0f
-		};
-
-		auto vertexBuffer = CreateRef<OpenGLVertexBuffer>(triangle, sizeof(triangle));
-		vertexBuffer->SetLayout({
-			{ ShaderDataType::Float3, "a_Position" }
-			});
-
-		auto vertexArray = CreateRef<OpenGLVertexArray>();
-		vertexArray->AddVertexBuffer(vertexBuffer);
-
-		auto shader = ShaderLibrary::Get().GetShader(FlatColorShaderName);
-		shader->Bind();
-		vertexArray->Bind();
-		shader->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-		shader->UploadUniformMat4("u_ViewProjectionMatrix", m_CameraController->GetCamera().GetViewProjectionMatrix());
-		shader->UploadUniformMat4("u_ModelMatrix", glm::mat4(1.0f));
-
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
+		m_Scene->Render();
 
 		m_MsoFramebuffer->UnBind();
 	}
 
 	void AppLayer::OnRenderImGui()
 	{
-		ImGui::Begin("Test window");
-
-		ImGui::Text("Test ");
-
-		ImGui::End();
-
+		RenderDebugWindow();
 		RenderViewport();
+	}
+
+	void AppLayer::RenderDebugWindow()
+	{
+		ImGui::Begin("Debug");
+		auto framerate = ImGui::GetIO().Framerate;
+		ImGui::Text("Application framerate %.2f", framerate);
+		ImGui::End();
 	}
 
 	void AppLayer::RenderViewport()

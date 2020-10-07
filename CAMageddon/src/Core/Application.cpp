@@ -23,7 +23,7 @@ namespace CAMageddon
     void Application::Init()
     {
         Logger::Init();
-        WindowProps windowData("Hello Window");
+        WindowProps windowData("CAMageddon");
 
         m_window->Init(windowData);
         m_window->SetVSync(true);

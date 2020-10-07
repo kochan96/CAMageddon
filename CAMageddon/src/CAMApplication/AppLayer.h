@@ -2,6 +2,7 @@
 #include "Core/Layer.h"
 #include "Rendering/FPSCameraController.h"
 #include "Rendering/FrameBuffer.h"
+#include "Scene.h"
 
 namespace CAMageddon
 {
@@ -18,11 +19,15 @@ namespace CAMageddon
 		virtual void OnEvent(Event& event) override;
 
 	private:
+		void RenderDebugWindow();
 		void RenderViewport();
 
-		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
+	private:
+		Scope<FPSCameraController> m_CameraController;
+		Scope<Scene> m_Scene;
 		Ref<OpenGLFramebuffer> m_MsoFramebuffer;
 		Ref<OpenGLFramebuffer> m_ViewportFramebuffer;
-		Scope<FPSCameraController> m_CameraController;
+		
+		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 	};
 }
