@@ -2,7 +2,7 @@
 #include "Rendering/Primitives/PrimitvesFactory.h"
 #include "Rendering/AssetsLibrary.h"
 #include "Rendering/Camera.h"
-#include <CAMApplication/Simulation/MilimetersGLConverter.h>
+#include <CAMApplication/Converter/MilimetersGLConverter.h>
 
 
 namespace CAMageddon

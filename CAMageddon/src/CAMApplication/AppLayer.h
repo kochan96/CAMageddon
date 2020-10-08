@@ -20,6 +20,7 @@ namespace CAMageddon
 
 	private:
 		void RenderDebugWindow();
+		void RenderSimulationControl();
 		void RenderViewport();
 
 	private:

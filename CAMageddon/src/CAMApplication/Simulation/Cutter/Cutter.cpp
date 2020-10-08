@@ -1,5 +1,5 @@
 #include "Cutter.h"
-#include "CAMApplication/Simulation/MilimetersGLConverter.h"
+#include "CAMApplication/Converter/MilimetersGLConverter.h"
 #include "Rendering/AssetsLibrary.h"
 #include "Rendering/Camera.h"
 #include "Rendering/Primitives/PrimitvesFactory.h"

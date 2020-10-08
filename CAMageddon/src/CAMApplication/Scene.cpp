@@ -7,7 +7,7 @@
 #include "Rendering/AssetsLibrary.h"
 #include <Rendering/Primitives/PrimitvesFactory.h>
 
-#include "Simulation/MilimetersGLConverter.h"
+#include "CAMApplication/Converter/MilimetersGLConverter.h"
 
 namespace CAMageddon
 {
@@ -25,6 +25,25 @@ namespace CAMageddon
 		InitMaterial();
 		InitCutter();
 		InitLight();
+
+		InitSimulation();
+	}
+
+	void Scene::SetCutter(Ref<Cutter> cutter)
+	{
+		m_Cutter = cutter;
+		m_Simulation->SetCutter(cutter);
+	}
+
+	void Scene::SetMaterial(Ref<Material> material)
+	{
+		m_Material = material;
+		m_Simulation->SetMaterial(material);
+	}
+
+	void Scene::SetCutterInstructions(const std::vector<Instruction> instruction)
+	{
+		m_Simulation->SetInstructions(instruction);
 	}
 
 	void Scene::LoadShaders()
@@ -40,6 +59,12 @@ namespace CAMageddon
 		AssetsLibrary::Get().LoadTexture(AssetsConstants::MaterialDiffuseTexture, AssetsConstants::MaterialDiffuseTexturePath);
 		AssetsLibrary::Get().LoadTexture(AssetsConstants::MaterialSpecularTexture, AssetsConstants::MaterialSpecularTexturePath);
 		AssetsLibrary::Get().LoadTexture(AssetsConstants::MaterialBumpTexture, AssetsConstants::MaterialBumpTexturePath);
+	}
+
+	void Scene::InitSimulation()
+	{
+		m_Simulation = CreateScope<CuttingSimulation>();
+		m_Simulation->SetMaterial(m_Material);
 	}
 
 	void Scene::InitPlane()
@@ -78,11 +103,7 @@ namespace CAMageddon
 
 	void Scene::Update(Timestep ts)
 	{
-		const float distance = MilimetersGLConverter::MilimetersToGL(25.0f) * ts;
-		auto cutterPositon = m_Cutter->GetPosition();
-		cutterPositon.x += distance;
-
-		m_Cutter->SetPosition(cutterPositon);
+		m_Simulation->Update(ts);
 	}
 
 	void Scene::Render()
@@ -99,6 +120,8 @@ namespace CAMageddon
 		if (m_RenderOptions.RenderCutter)
 			RenderCutter();
 	}
+
+
 
 	void Scene::RenderPlane()
 	{

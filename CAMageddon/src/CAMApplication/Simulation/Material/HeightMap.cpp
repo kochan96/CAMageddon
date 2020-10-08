@@ -1,5 +1,5 @@
 #include "HeightMap.h"
-#include <CAMApplication/Simulation/MilimetersGLConverter.h>
+#include <CAMApplication/Converter/MilimetersGLConverter.h>
 #include <glad/glad.h>
 
 namespace CAMageddon

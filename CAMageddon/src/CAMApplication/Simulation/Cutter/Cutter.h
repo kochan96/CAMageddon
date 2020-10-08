@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "Instruction.h"
 #include <Rendering/VertexArray.h>
 #include <Rendering/Shader.h>
 

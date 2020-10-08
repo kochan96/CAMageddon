@@ -3,6 +3,9 @@
 #include "glad/glad.h"
 #include "Core/Application.h"
 
+#include "Helpers/FileDialog.h"
+#include "Simulation/CuttingLoader.h"
+
 
 namespace CAMageddon
 {
@@ -58,7 +61,7 @@ namespace CAMageddon
 
 		m_MsoFramebuffer->Bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
+
 		m_Scene->Render();
 
 		m_MsoFramebuffer->UnBind();
@@ -67,6 +70,7 @@ namespace CAMageddon
 	void AppLayer::OnRenderImGui()
 	{
 		RenderDebugWindow();
+		RenderSimulationControl();
 		RenderViewport();
 	}
 
@@ -75,6 +79,26 @@ namespace CAMageddon
 		ImGui::Begin("Debug");
 		auto framerate = ImGui::GetIO().Framerate;
 		ImGui::Text("Application framerate %.2f", framerate);
+		ImGui::End();
+	}
+
+	void AppLayer::RenderSimulationControl()
+	{
+		ImGui::Begin("Simulation");
+		if (ImGui::Button("Load"))
+		{
+			const char* filters[] = { "*.k*","*.f*" };
+
+			auto filePath = FileDialog::OpenFile("SelectPath", "assets/paths/", 2, filters);
+			if (filePath)
+			{
+				auto cutter = CuttingLoader::LoadCutter(filePath);
+				auto instructions = CuttingLoader::LoadInstructions(filePath);
+				m_Scene->SetCutter(std::move(cutter));
+				m_Scene->SetCutterInstructions(instructions);
+			}
+		}
+
 		ImGui::End();
 	}
 

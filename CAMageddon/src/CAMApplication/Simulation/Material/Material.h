@@ -30,6 +30,8 @@ namespace CAMageddon
 
 		void Render(const FPSCamera& camera, const glm::vec3& lightPos);
 
+		float GetHeight() { return m_Specification.SizeY; }
+
 	private:
 		void Init();
 

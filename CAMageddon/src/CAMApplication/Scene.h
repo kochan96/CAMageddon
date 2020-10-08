@@ -6,6 +6,7 @@
 
 #include "Simulation/Material/Material.h"
 #include "Simulation/Cutter/Cutter.h"
+#include "Simulation/Simulation.h"
 
 
 namespace CAMageddon
@@ -29,9 +30,20 @@ namespace CAMageddon
 
 		RenderOptions& GetRenderOptions() { return m_RenderOptions; }
 
+		Ref<Material> GetMatarial() const { return m_Material; }
+		void SetMaterial(Ref<Material> material);
+
+		Ref<Cutter> GetCutter() const { return m_Cutter; }
+		void SetCutter(Ref<Cutter> cutter);
+
+		void SetCutterInstructions(const std::vector<Instruction> instruction);
+
+
 	private:
 		void LoadShaders();
 		void LoadTextures();
+
+		void InitSimulation();
 
 		void InitPlane();
 		void InitMaterial();
@@ -44,8 +56,9 @@ namespace CAMageddon
 		void RenderCutter();
 
 	private:
-		Scope<Material> m_Material;
-		Scope<Cutter> m_Cutter;
+		Scope<CuttingSimulation> m_Simulation;
+		Ref<Material> m_Material;
+		Ref<Cutter> m_Cutter;
 
 		RenderOptions m_RenderOptions;
 		FPSCamera& m_Camera;
