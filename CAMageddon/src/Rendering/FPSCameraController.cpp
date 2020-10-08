@@ -20,25 +20,25 @@ namespace CAMageddon
 	{
 		glm::vec3 right(1.0f, 0.0f, 0.0f);
 		right = glm::rotateX(right, m_CameraRotation.x);
-		right = glm::rotateY(right, m_CameraRotation.y);
+		right = glm::rotateZ(right, m_CameraRotation.y);
 
 		return right;
 	}
 
 	glm::vec3 FPSCameraController::GetCameraFront()
 	{
-		glm::vec3 front(0.0f, 0.0f, -1.0f);
+		glm::vec3 front(0.0f, 1.0f, 0.0f);
 		front = glm::rotateX(front, m_CameraRotation.x);
-		front = glm::rotateY(front, m_CameraRotation.y);
+		front = glm::rotateZ(front, m_CameraRotation.y);
 
 		return front;
 	}
 
 	glm::vec3 FPSCameraController::GetCameraUp()
 	{
-		glm::vec3 up(0.0f, 1.0f, 0.0f);
+		glm::vec3 up(0.0f, 0.0f, 1.0f);
 		up = glm::rotateX(up, m_CameraRotation.x);
-		up = glm::rotateY(up, m_CameraRotation.y);
+		up = glm::rotateZ(up, m_CameraRotation.y);
 
 		return up;
 	}

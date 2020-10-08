@@ -102,10 +102,15 @@ namespace CAMageddon
 		float halfHeight = height / 2.0f;
 
 		vertices.reserve(4);
-		vertices.push_back({ glm::vec3(-halfWidth,0.0f,halfHeight) });
-		vertices.push_back({ glm::vec3(halfWidth,0.0f,halfHeight) });
-		vertices.push_back({ glm::vec3(halfWidth,0.0f,-halfHeight) });
-		vertices.push_back({ glm::vec3(-halfWidth,0.0f,-halfHeight) });
+		vertices.push_back({ glm::vec3(-halfWidth,-halfHeight,0.0f) });
+		vertices.push_back({ glm::vec3(halfWidth, -halfHeight,0.0f) });
+		vertices.push_back({ glm::vec3(halfWidth, halfHeight, 0.0f) });
+		vertices.push_back({ glm::vec3(-halfWidth,halfHeight, 0.0f) });
+
+		/*vertices.push_back({ glm::vec3(-halfWidth,0.0f,	halfHeight) });
+		vertices.push_back({ glm::vec3(halfWidth, 0.0f,	halfHeight) });
+		vertices.push_back({ glm::vec3(halfWidth, 0.0f, -halfHeight) });
+		vertices.push_back({ glm::vec3(-halfWidth,0.0f, -halfHeight) });*/
 
 		return { vertices };
 	}
@@ -135,14 +140,14 @@ namespace CAMageddon
 
 				float currentX = (2 * currentU - 1) * halfWidth;
 				float nextX = (2 * nextU - 1) * halfWidth;
-				float currentZ = -(2 * currentV - 1) * halfHeight;
-				float nextZ = -(2 * nextV - 1) * halfHeight;
+				float currentY = (2 * currentV - 1) * halfHeight;
+				float nextY = (2 * nextV - 1) * halfHeight;
 
 				int count = vertices.size();
-				vertices.push_back({ glm::vec3(currentX, 0.0f, currentZ), normal, glm::vec2(currentU, currentV) });
-				vertices.push_back({ glm::vec3(nextX,	 0.0f, currentZ), normal, glm::vec2(nextU, currentV) });
-				vertices.push_back({ glm::vec3(nextX,	 0.0f, nextZ),	 normal, glm::vec2(nextU, nextV) });
-				vertices.push_back({ glm::vec3(currentX, 0.0f, nextZ),	 normal, glm::vec2(currentU, nextV) });
+				vertices.push_back({ glm::vec3(currentX, currentY, 0.0f), normal, glm::vec2(currentU, currentV) });
+				vertices.push_back({ glm::vec3(nextX,	 currentY,  0.0f), normal, glm::vec2(nextU, currentV) });
+				vertices.push_back({ glm::vec3(nextX,	 nextY,  0.0f),	 normal, glm::vec2(nextU, nextV) });
+				vertices.push_back({ glm::vec3(currentX, nextY,  0.0f),	 normal, glm::vec2(currentU, nextV) });
 
 				indices.push_back(count);
 				indices.push_back(count + 1);
@@ -174,14 +179,14 @@ namespace CAMageddon
 			float currentTex = i * texDelta;
 			float nextTex = (i + 1) * texDelta;
 
-			glm::vec3 currentNormal = glm::vec3(glm::cos(currentAngle), 0.0f, -glm::sin(currentAngle));
-			glm::vec3 nextNormal = glm::vec3(glm::cos(nextAngle), 0.0f, -glm::sin(nextAngle));
+			glm::vec3 currentNormal = glm::vec3(glm::cos(currentAngle), glm::sin(currentAngle), 0.0f);
+			glm::vec3 nextNormal = glm::vec3(glm::cos(nextAngle), glm::sin(nextAngle), 0.0f);
 
 			int count = vertices.size();
-			glm::vec3 bottomCurrentAngle = radius * currentNormal + glm::vec3(0.0f, startHeight, 0.0f);
-			glm::vec3 bottomNextAngle = radius * nextNormal + glm::vec3(0.0f, startHeight, 0.0f);;
-			glm::vec3 topCurrentAngle = radius * currentNormal + glm::vec3(0.0f, height, 0.0f);
-			glm::vec3 topNextAngle = radius * nextNormal + glm::vec3(0.0f, height, 0.0f);
+			glm::vec3 bottomCurrentAngle = radius * currentNormal + glm::vec3(0.0f, 0.0f, startHeight);
+			glm::vec3 bottomNextAngle = radius * nextNormal + glm::vec3(0.0f, 0.0f, startHeight);;
+			glm::vec3 topCurrentAngle = radius * currentNormal + glm::vec3(0.0f, 0.0f, height);
+			glm::vec3 topNextAngle = radius * nextNormal + glm::vec3(0.0f, 0.0f, height);
 
 			vertices.push_back({ bottomCurrentAngle, currentNormal, glm::vec2(currentTex,0.0f) });
 			vertices.push_back({ bottomNextAngle, nextNormal, glm::vec2(nextTex,0.0f) });
@@ -199,40 +204,7 @@ namespace CAMageddon
 		return { vertices,indices };
 	}
 
-	VerticesIndicesBufferData<VertexNT> PrimitiveFactory::CreateCircleVerticesNormalsTexture(float radius, int radiusCount)
-	{
-		std::vector<VertexNT> vertices;
-		std::vector<uint32_t> indices;
 
-		float startHeight = 0.0f;
-
-		float angleDelta = glm::two_pi<float>() / radiusCount;
-		float texDelta = 1.0f / radiusCount;
-
-		glm::vec3 normal = glm::vec3(0.0f, 1.0f, 0.0f);
-
-		for (int i = 0; i < radiusCount; i++)
-		{
-			float currentAngle = i * angleDelta;
-			float nextAngle = (i + 1) * angleDelta;
-
-			float currentTex = i * texDelta;
-			float nextTex = (i + 1) * texDelta;
-
-			glm::vec3 currentPosition = radius * glm::vec3(glm::cos(currentAngle), 0.0f, -glm::sin(currentAngle));
-			glm::vec3 nextPosition = radius * glm::vec3(glm::cos(nextAngle), 0.0f, -glm::sin(nextAngle));
-
-			int count = vertices.size();
-			vertices.push_back({ currentPosition, normal, glm::vec2(currentTex,0.0f) });
-			vertices.push_back({ nextPosition, normal, glm::vec2(nextTex,0.0f) });
-
-			indices.push_back(0);
-			indices.push_back(count + 1);
-			indices.push_back(count + 2);
-		}
-
-		return { vertices,indices };
-	}
 	VerticesIndicesBufferData<VertexNT> PrimitiveFactory::CreateSphereVerticesNormalsTexture(float radius, int uDivisionCount, int vDivisionCount)
 	{
 		std::vector<VertexNT> vertices;

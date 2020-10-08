@@ -16,7 +16,7 @@ namespace CAMageddon
 		if (!m_Material)
 			m_State == SimulationState::MATERIAL_NOT_ASSIGNED;
 		else if (m_Material)
-			m_Cutter->SetPosition(glm::vec3(0.0f, MilimetersGLConverter::MilimetersToGL(m_Material->GetHeight() + 100.0f), 0.0f));
+			m_Cutter->SetPosition(glm::vec3(0.0f, 0.0f, MilimetersGLConverter::MilimetersToGL(m_Material->GetHeight() + 100.0f)));
 		else if (m_Instructions.empty())
 			m_State == SimulationState::INSTRUCTIONS_NOT_ASSINGED;
 		else
@@ -35,7 +35,7 @@ namespace CAMageddon
 		if (!m_Cutter)
 			m_State = SimulationState::CUTTER_NOT_ASSIGNED;
 		else if (m_Cutter)
-			m_Cutter->SetPosition(glm::vec3(0.0f, MilimetersGLConverter::MilimetersToGL(m_Material->GetHeight() + 100.0f), 0.0f));
+			m_Cutter->SetPosition(glm::vec3(0.0f, 0.0f, MilimetersGLConverter::MilimetersToGL(m_Material->GetHeight() + 100.0f)));
 		else if (m_Instructions.empty())
 			m_State = SimulationState::INSTRUCTIONS_NOT_ASSINGED;
 		else
@@ -68,7 +68,7 @@ namespace CAMageddon
 
 		m_State = SimulationState::RUNNING;
 
-		auto startPositon = MilimetersGLConverter::MilimetersToGL(m_Instructions.front().GetPosition());
+		auto startPositon = MilimetersGLConverter::MilimetersToGL(m_Instructions[0].GetPosition());
 		m_Cutter->SetPosition(startPositon);
 	}
 

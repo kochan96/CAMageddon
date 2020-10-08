@@ -15,12 +15,12 @@ namespace CAMageddon
 
     void FPSCamera::RecalculateViewMatrix()
     {
-        glm::vec3 front(0.0f, 0.0f, -1.0f);
+        glm::vec3 front(0.0f, 1.0f, 0.0f);
         front = glm::rotateX(front, m_Rotation.x);
-        front = glm::rotateY(front, m_Rotation.y);
+        front = glm::rotateZ(front, m_Rotation.y);
         front = glm::normalize(front);
 
-        m_ViewMatrix = glm::lookAt(m_Position, m_Position + front, glm::vec3(0.0f, 1.0f, 0.0f));
+        m_ViewMatrix = glm::lookAt(m_Position, m_Position + front, glm::vec3(0.0f, 0.0f, 1.0f));
         m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
     }
 

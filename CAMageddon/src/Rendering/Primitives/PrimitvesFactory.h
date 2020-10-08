@@ -63,11 +63,6 @@ namespace CAMageddon
 			float height = 5.0f,
 			int radiusCount = 10);
 
-		static VerticesIndicesBufferData<VertexNT> CreateCircleVerticesNormalsTexture(
-			float radius = 1.0f,
-			int radiusCount = 10
-		);
-
 		static VerticesIndicesBufferData<VertexNT> CreateSphereVerticesNormalsTexture(
 			float radius = 1.0f,
 			int uDivisionCount = 10,

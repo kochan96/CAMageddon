@@ -34,7 +34,7 @@ vec3 CalculateNormalFromHeightMap()
 void main()
 {
     float height = texture(u_HeightMap, a_TexCoord).r;
-    vec3 position = a_Position + vec3(0.0f, height, 0.0f);
+    vec3 position = a_Position + vec3(0.0f, 0.0f, height);
     gl_Position = u_ViewProjectionMatrix * u_ModelMatrix * vec4(position, 1.0f);
     
     v_FragPos = vec3(u_ModelMatrix * vec4(position, 1.0f));

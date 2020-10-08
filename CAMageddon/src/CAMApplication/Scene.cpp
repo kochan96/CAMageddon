@@ -125,7 +125,7 @@ namespace CAMageddon
 	void Scene::InitTrajectory(const std::vector<Instruction>& instructions)
 	{
 		std::vector<glm::vec3> positions;
-		std::transform(instructions.begin(), instructions.end(), std::back_inserter(positions), 
+		std::transform(instructions.begin(), instructions.end(), std::back_inserter(positions),
 			[](const Instruction& instruction) {return MilimetersGLConverter::MilimetersToGL(instruction.GetPosition()); });
 
 		auto vertexBuffer = CreateRef<OpenGLVertexBuffer>((float*)positions.data(), positions.size() * 3 * sizeof(float));
@@ -135,7 +135,7 @@ namespace CAMageddon
 
 		m_TrajectoryVertexArray = CreateRef<OpenGLVertexArray>();
 		m_TrajectoryVertexArray->AddVertexBuffer(vertexBuffer);
-		
+
 		trajectoryCount = positions.size();
 	}
 
@@ -176,7 +176,7 @@ namespace CAMageddon
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", m_Camera.GetViewProjectionMatrix());
 
 		//WORLD TRANSFORM
-		shader->UploadUniformMat4("u_ModelMatrix", glm::scale(glm::mat4(1.0f), glm::vec3(6.0f, 0.0f, 6.0f)));
+		shader->UploadUniformMat4("u_ModelMatrix", glm::scale(glm::mat4(1.0f), glm::vec3(6.0f, 6.0f, 0.0f)));
 
 		glPatchParameteri(GL_PATCH_VERTICES, 4);
 		glDrawArrays(GL_PATCHES, 0, 4);

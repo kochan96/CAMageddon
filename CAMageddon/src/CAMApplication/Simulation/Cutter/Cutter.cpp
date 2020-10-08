@@ -68,8 +68,7 @@ namespace CAMageddon
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
 
 		//WORLD TRANSFORM
-		auto height = MilimetersGLConverter::MilimetersToGL(60.0f);
-		auto worldMatrix = glm::translate(glm::mat4(1.0f), GetPosition() + glm::vec3(0.0f, height, 0.0f));
+		auto worldMatrix = glm::translate(glm::mat4(1.0f), GetPosition());
 		shader->UploadUniformMat4("u_ModelMatrix", worldMatrix);
 
 		m_VertexArray->Bind();
