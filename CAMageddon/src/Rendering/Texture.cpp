@@ -78,7 +78,8 @@ namespace CAMageddon
 
 	void OpenGLTexture2D::SetData(unsigned char* data)
 	{
-		glBindTexture(GL_TEXTURE_2D, m_RendererID);
+		
+
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 	}
 }

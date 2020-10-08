@@ -49,7 +49,7 @@ namespace CAMageddon
 		CuttingError m_Error = CuttingError::NONE;
 		SimulationState m_State = SimulationState::MATERIAL_NOT_ASSIGNED;
 
-		float m_Time;
+		float m_Time = 0.0f;
 		float m_DeltaTime = 0.1f;
 		float m_SimulationSpeed = 1.0f;
 	};

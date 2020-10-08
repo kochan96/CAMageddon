@@ -85,6 +85,8 @@ namespace CAMageddon
 	void AppLayer::RenderSimulationControl()
 	{
 		ImGui::Begin("Simulation");
+
+		ImGui::Text("Load cutter first");
 		if (ImGui::Button("Load"))
 		{
 			const char* filters[] = { "*.k*","*.f*" };
@@ -97,6 +99,51 @@ namespace CAMageddon
 				m_Scene->SetCutter(std::move(cutter));
 				m_Scene->SetCutterInstructions(instructions);
 			}
+		}
+
+		if (ImGui::TreeNode("Simulation Controls"))
+		{
+			if (ImGui::Button("Start"))
+			{
+				m_Scene->StartSimulation();
+			}
+			if (ImGui::Button("Pause"))
+			{
+				m_Scene->PauseSimulation();
+			}
+			if (ImGui::Button("FastForward"))
+			{
+				m_Scene->FastForwardSimulation();
+			}
+
+			ImGui::TreePop();
+		}
+
+		if (ImGui::TreeNode("Cutter"))
+		{
+			auto cutter = m_Scene->GetCutter();
+			if (cutter)
+			{
+				ImGui::Text("Cutter Type %s", cutter->GetType() == CutterType::FLAT ? "Flat" : "Spherical");
+				ImGui::Text("Cutter diameter %f", cutter->GetDiameter());
+			}
+			else
+			{
+
+			}
+
+			ImGui::TreePop();
+		}
+
+		if (ImGui::TreeNode("Material"))
+		{
+			auto material = m_Scene->GetMaterial();
+			if (material)
+			{
+				ImGui::Text("Material loaded");
+			}
+
+			ImGui::TreePop();
 		}
 
 		ImGui::End();

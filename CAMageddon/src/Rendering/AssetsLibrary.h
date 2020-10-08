@@ -17,6 +17,9 @@ namespace CAMageddon
         const std::string LightShader = "LightShader";
         const std::string LightShaderPath = "assets/shaders/LightShader.glsl";
 
+        const std::string TrajectoryShader = "TrajectoryShader";
+        const std::string TrajectoryShaderPath = "assets/shaders/TrajectoryShader.glsl";
+
         const std::string CutterShader = "CutterShader";
         const std::string CutterShaderPath = "assets/shaders/CutterShader.glsl";
 
@@ -28,6 +31,8 @@ namespace CAMageddon
 
         const std::string MaterialBumpTexture = "wood_bump";
         const std::string MaterialBumpTexturePath = "assets/textures/wood/wood_bump.jpg";
+
+
     }
 
     class AssetsLibrary

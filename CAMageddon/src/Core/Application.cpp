@@ -26,7 +26,7 @@ namespace CAMageddon
         WindowProps windowData("CAMageddon");
 
         m_window->Init(windowData);
-        m_window->SetVSync(false);
+        m_window->SetVSync(true);
         m_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
         m_ImGuiLayer = new ImGuiLayer("ImGui");

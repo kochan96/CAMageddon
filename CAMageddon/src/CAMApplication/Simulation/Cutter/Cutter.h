@@ -24,6 +24,8 @@ namespace CAMageddon
 
 		void Render(const FPSCamera& camera, const glm::vec3 lightPos);
 
+		CutterType GetType() const { return m_Type; }
+
 	private:
 		void Init();
 

@@ -26,24 +26,44 @@ namespace CAMageddon
 		InitCutter();
 		InitLight();
 
+		InitTrajectory(std::vector<Instruction>());
+
 		InitSimulation();
 	}
 
 	void Scene::SetCutter(Ref<Cutter> cutter)
 	{
+		if (IsSimulationRunning())
+		{
+			LOG_ERROR("Simulation is running");
+			return;
+		}
+
 		m_Cutter = cutter;
 		m_Simulation->SetCutter(cutter);
 	}
 
 	void Scene::SetMaterial(Ref<Material> material)
 	{
+		if (IsSimulationRunning())
+		{
+			LOG_ERROR("Simulation is running");
+			return;
+		}
+
 		m_Material = material;
 		m_Simulation->SetMaterial(material);
 	}
 
 	void Scene::SetCutterInstructions(const std::vector<Instruction> instruction)
 	{
+		if (IsSimulationRunning())
+		{
+			LOG_ERROR("Simulation is running");
+			return;
+		}
 		m_Simulation->SetInstructions(instruction);
+		InitTrajectory(instruction);
 	}
 
 	void Scene::LoadShaders()
@@ -52,6 +72,7 @@ namespace CAMageddon
 		AssetsLibrary::Get().LoadShader(AssetsConstants::MaterialShader, AssetsConstants::MaterialShaderPath);
 		AssetsLibrary::Get().LoadShader(AssetsConstants::LightShader, AssetsConstants::LightShaderPath);
 		AssetsLibrary::Get().LoadShader(AssetsConstants::CutterShader, AssetsConstants::CutterShaderPath);
+		AssetsLibrary::Get().LoadShader(AssetsConstants::TrajectoryShader, AssetsConstants::TrajectoryShaderPath);
 	}
 
 	void Scene::LoadTextures()
@@ -101,6 +122,23 @@ namespace CAMageddon
 		m_Cutter = CreateScope<Cutter>(CutterType::FLAT, 12);
 	}
 
+	void Scene::InitTrajectory(const std::vector<Instruction>& instructions)
+	{
+		std::vector<glm::vec3> positions;
+		std::transform(instructions.begin(), instructions.end(), std::back_inserter(positions), 
+			[](const Instruction& instruction) {return MilimetersGLConverter::MilimetersToGL(instruction.GetPosition()); });
+
+		auto vertexBuffer = CreateRef<OpenGLVertexBuffer>((float*)positions.data(), positions.size() * 3 * sizeof(float));
+		vertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" },
+			});
+
+		m_TrajectoryVertexArray = CreateRef<OpenGLVertexArray>();
+		m_TrajectoryVertexArray->AddVertexBuffer(vertexBuffer);
+		
+		trajectoryCount = positions.size();
+	}
+
 	void Scene::Update(Timestep ts)
 	{
 		m_Simulation->Update(ts);
@@ -119,9 +157,10 @@ namespace CAMageddon
 
 		if (m_RenderOptions.RenderCutter)
 			RenderCutter();
+
+		if (m_RenderOptions.RenderTrajectory)
+			RenderTrajectory();
 	}
-
-
 
 	void Scene::RenderPlane()
 	{
@@ -172,5 +211,26 @@ namespace CAMageddon
 	void Scene::RenderCutter()
 	{
 		m_Cutter->Render(m_Camera, lightPos);
+	}
+
+	void Scene::RenderTrajectory()
+	{
+		auto shader = AssetsLibrary::Get().GetShader(AssetsConstants::TrajectoryShader);
+		shader->Bind();
+		m_TrajectoryVertexArray->Bind();
+		//COLOR
+		shader->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+
+		//VIEW PROJECTION
+		shader->UploadUniformMat4("u_ViewProjectionMatrix", m_Camera.GetViewProjectionMatrix());
+
+		//WORLD TRANSFORM
+		shader->UploadUniformMat4("u_ModelMatrix", glm::mat4(1.0f));
+
+		glDisable(GL_DEPTH_TEST);
+
+		glDrawArrays(GL_LINE_STRIP, 0, trajectoryCount);
+
+		glEnable(GL_DEPTH_TEST);
 	}
 }

@@ -66,26 +66,29 @@ namespace CAMageddon
 			LOG_ERROR("Simulation not ready");
 		}
 
-		m_State == SimulationState::RUNNING;
+		m_State = SimulationState::RUNNING;
+
+		auto startPositon = MilimetersGLConverter::MilimetersToGL(m_Instructions.front().GetPosition());
+		m_Cutter->SetPosition(startPositon);
 	}
 
 	void CuttingSimulation::Pause()
 	{
-		m_State == SimulationState::PAUSED;
+		m_State = SimulationState::PAUSED;
 	}
 
 	void CuttingSimulation::Update(Timestep ts)
 	{
-		if (!IsReady())
+		if (!IsRunning())
 		{
 			return;
 		}
 
-		const float distance = MilimetersGLConverter::MilimetersToGL(25.0f) * ts;
+		/*const float distance = MilimetersGLConverter::MilimetersToGL(25.0f) * ts;
 		auto cutterPositon = m_Cutter->GetPosition();
 		cutterPositon.x += distance;
 
-		m_Cutter->SetPosition(cutterPositon);
+		m_Cutter->SetPosition(cutterPositon);*/
 	}
 
 	void CuttingSimulation::FastForward()
