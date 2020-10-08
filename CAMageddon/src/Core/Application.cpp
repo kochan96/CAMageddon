@@ -26,7 +26,7 @@ namespace CAMageddon
         WindowProps windowData("CAMageddon");
 
         m_window->Init(windowData);
-        m_window->SetVSync(true);
+        m_window->SetVSync(false);
         m_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
         m_ImGuiLayer = new ImGuiLayer("ImGui");
@@ -61,6 +61,7 @@ namespace CAMageddon
 
     void Application::Run()
     {
+        bool first = true;
 
         while (m_Running)
         {
@@ -69,7 +70,7 @@ namespace CAMageddon
             Timestep timestep = time - m_LastFrameTime;
             m_LastFrameTime = time;
 
-            if (!m_Minimized)
+            if (!m_Minimized && !first)
             {
                 {
                     for (Layer* layer : m_LayerStack)
@@ -85,6 +86,8 @@ namespace CAMageddon
             }
 
             m_window->OnUpdate();
+
+            first = false;
         }
     }
 

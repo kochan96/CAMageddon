@@ -17,6 +17,7 @@ IncludeDir["ImGui"] = "CAMageddon/vendor/imgui"
 IncludeDir["glm"] = "CAMageddon/vendor/glm"
 IncludeDir["spdlog"] = "CAMageddon/vendor/spdlog"
 IncludeDir["tinygiledialogs"] = "CAMageddon/vendor/tinyfiledialogs"
+IncludeDir["stb_image"] = "CAMageddon/vendor/stb_image"
 
 group "Dependencies"
     include "CAMageddon/vendor/glfw"
@@ -41,6 +42,12 @@ project "CAMageddon"
         "%{prj.name}/assets/**",
     }
 
+    excludes
+    {
+        "%{prj.name}/assets/textures/**.pdf",
+        "%{prj.name}/assets/textures/**.txt",
+    }
+
     defines
 	{
 		"_CRT_SECURE_NO_WARNINGS",
@@ -55,7 +62,8 @@ project "CAMageddon"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.tinygiledialogs}"
+        "%{IncludeDir.tinygiledialogs}",
+        "%{IncludeDir.stb_image}"
     }
 
     links 

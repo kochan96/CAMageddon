@@ -5,19 +5,41 @@
 
 layout (location = 0) in vec3 a_Position;
 layout (location = 1) in vec3 a_Normal;
+layout (location = 2) in vec2 a_TexCoord;
 
 uniform mat4 u_ViewProjectionMatrix;
 uniform mat4 u_ModelMatrix;
 
+uniform sampler2D u_HeightMap;
+
 out vec3 v_Normal;
 out vec3 v_FragPos;
+out vec2 v_TexCoord;
+
+
+vec3 CalculateNormalFromHeightMap()
+{
+    float height = texture(u_HeightMap, a_TexCoord).r;
+    float heightTop = textureOffset(u_HeightMap, a_TexCoord, ivec2(0, 1)).r;
+    float heightBottom = textureOffset(u_HeightMap, a_TexCoord, ivec2(0, -1)).r;
+    float heightRight = textureOffset(u_HeightMap, a_TexCoord, ivec2(1, 0)).r;
+    float heightLeft = textureOffset(u_HeightMap, a_TexCoord, ivec2(-1, 0)).r;
+
+    vec3 va = normalize(vec3(2.0f, heightRight - heightLeft, 0.0f));
+    vec3 vb = normalize(vec3(0.0f, heightTop - heightBottom, -2.0f));
+
+    return vec3(0.0f,height,0.0f);
+}
 
 void main()
 {
-    gl_Position = u_ViewProjectionMatrix * u_ModelMatrix * vec4(a_Position, 1.0f);
+    float height = texture(u_HeightMap, a_TexCoord).r;
+    vec3 position = a_Position + vec3(0.0f, height, 0.0f);
+    gl_Position = u_ViewProjectionMatrix * u_ModelMatrix * vec4(position, 1.0f);
     
-    v_FragPos = vec3(u_ModelMatrix * vec4(a_Position, 1.0f));
+    v_FragPos = vec3(u_ModelMatrix * vec4(position, 1.0f));
     v_Normal = mat3(transpose(inverse(u_ModelMatrix))) * a_Normal;
+    v_TexCoord = a_TexCoord;
 }
 
 
@@ -27,8 +49,8 @@ void main()
 layout(location = 0) out vec4 color;
 
 struct Material {
-    vec3 diffuse;
-    vec3 specular;
+    sampler2D diffuse;
+    sampler2D specular;
     float shininess;
 };
 
@@ -46,16 +68,18 @@ struct PointLight {
 };
 
 #define MAX_LIGHT_COUNT 10
-uniform int pointlightCount;
-uniform PointLight pointLights[MAX_LIGHT_COUNT];
+uniform int u_PointlightCount;
+uniform PointLight u_PointLights[MAX_LIGHT_COUNT];
 
-uniform Material material;
-uniform vec4 u_Color;
+uniform Material u_Material;
 
 uniform vec3 u_ViewPosition;
 
+uniform sampler2D u_HeightMap;
+
 in vec3 v_Normal;
 in vec3 v_FragPos;
+in vec2 v_TexCoord;
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 
@@ -65,9 +89,9 @@ void main()
     vec3 viewDir = normalize(u_ViewPosition - v_FragPos);
 
     vec3 result = vec3(0.0f,0.0f,0.0f);
-    for(int i=0;i<pointlightCount;i++)
+    for(int i=0;i<u_PointlightCount;i++)
     {
-        result += CalcPointLight(pointLights[i], norm, v_FragPos, viewDir);
+        result += CalcPointLight(u_PointLights[i], norm, v_FragPos, viewDir);
     }
 
     color = vec4(result, 1.0f);
@@ -83,16 +107,16 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
     if(diff>0.0f)
     {
         vec3 reflectDir = reflect(-lightDir, normal);
-        spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
+        spec = pow(max(dot(viewDir, reflectDir), 0.0f), u_Material.shininess);
     }
 
     diff = max(diff, 0.0f);
 
     //Attenuation (maybe TODO)
 
-    vec3 ambient = light.ambient * material.diffuse;
-    vec3 diffuse = light.diffuse * diff * material.diffuse;
-    vec3 specular = light.specular * spec * material.specular;
+    vec3 ambient = light.ambient * texture(u_Material.diffuse, v_TexCoord).rgb;
+    vec3 diffuse = light.diffuse * diff * texture(u_Material.diffuse, v_TexCoord).rgb;
+    vec3 specular = light.specular * spec * texture(u_Material.specular, v_TexCoord).rgb;
 
     return (ambient + diffuse + specular);
 }

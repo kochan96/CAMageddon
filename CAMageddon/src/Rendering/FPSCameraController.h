@@ -41,6 +41,6 @@ namespace CAMageddon
         glm::vec2 lastMousePos = { 0.0f,0.0f };
 
         float m_CameraTranslationSpeed = 5.0f;
-        float m_CameraRotationSpeed = 0.1f;
+        float m_CameraRotationSpeed = 0.01f;
     };
 }

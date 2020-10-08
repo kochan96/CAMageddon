@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include "Instruction.h"
+#include <Rendering/VertexArray.h>
+#include <Rendering/Shader.h>
 
 namespace CAMageddon
 {
@@ -9,12 +11,28 @@ namespace CAMageddon
 		FLAT = 1, SPHERICAL = 2,
 	};
 
+	class FPSCamera;
+
 	class Cutter
 	{
 	public:
-		Cutter(const std::vector<Instruction>& instructions);
+		Cutter(CutterType type, float diameter);
+		glm::vec3 GetPosition() const { return m_Position; }
+		void SetPosition(const glm::vec3& position) { m_Position = position; }
+
+		float GetDiameter() const { return m_Diameter; }
+		float GetRadius() const { return m_Diameter / 2.0f; }
+
+		void Render(const FPSCamera& camera, const glm::vec3 lightPos);
 
 	private:
-		std::vector<Instruction> m_Instructions;
+		void Init();
+
+	private:
+		float m_Diameter;
+		CutterType m_Type;
+		glm::vec3 m_Position = { 0.0f,0.0f,0.0f };
+
+		Ref<OpenGLVertexArray> m_VertexArray;
 	};
 }
