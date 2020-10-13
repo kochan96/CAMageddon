@@ -11,10 +11,13 @@
 
 namespace CAMageddon
 {
-	glm::vec3 lightPos(5.0f, 10.0f, 2.0f);
+	glm::vec3 lightPos(0.0f, 0.0f, 5.0f);
 
 	Scene::Scene(FPSCamera& camera) : m_Camera(camera)
 	{
+		Light light;
+		light.Position = { 0.0f,1.0f,5.0f };
+		m_Lights.push_back(light);
 	}
 
 	void Scene::Init()
@@ -150,13 +153,13 @@ namespace CAMageddon
 			RenderPlane();
 
 		if (m_RenderOptions.RenderMaterial)
-			RenderMaterial();
+			m_Material->Render(m_Camera, m_Lights);
 
 		if (m_RenderOptions.RenderLight)
 			RenderLight();
 
 		if (m_RenderOptions.RenderCutter)
-			RenderCutter();
+			m_Cutter->Render(m_Camera, m_Lights);
 
 		if (m_RenderOptions.RenderTrajectory)
 			RenderTrajectory();
@@ -184,11 +187,6 @@ namespace CAMageddon
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 
-	void Scene::RenderMaterial()
-	{
-		m_Material->Render(m_Camera, lightPos);
-	}
-
 	void Scene::RenderLight()
 	{
 		auto shader = AssetsLibrary::Get().GetShader(AssetsConstants::LightShader);
@@ -202,15 +200,15 @@ namespace CAMageddon
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", m_Camera.GetViewProjectionMatrix());
 
 		//WORLD TRANSFORM
-		auto translationMatrix = glm::translate(glm::mat4(1.0f), lightPos);
-		auto modelMatrix = translationMatrix;
-		shader->UploadUniformMat4("u_ModelMatrix", modelMatrix);
+		for (auto light : m_Lights)
+		{
 
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-	}
-	void Scene::RenderCutter()
-	{
-		m_Cutter->Render(m_Camera, lightPos);
+			auto translationMatrix = glm::translate(glm::mat4(1.0f), light.Position);
+			auto modelMatrix = translationMatrix;
+			shader->UploadUniformMat4("u_ModelMatrix", modelMatrix);
+
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
 	}
 
 	void Scene::RenderTrajectory()

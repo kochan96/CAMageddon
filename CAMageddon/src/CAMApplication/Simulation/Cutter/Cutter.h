@@ -11,6 +11,7 @@ namespace CAMageddon
 	};
 
 	class FPSCamera;
+	struct Light;
 
 	class Cutter
 	{
@@ -22,7 +23,7 @@ namespace CAMageddon
 		float GetDiameter() const { return m_Diameter; }
 		float GetRadius() const { return m_Diameter / 2.0f; }
 
-		void Render(const FPSCamera& camera, const glm::vec3 lightPos);
+		void Render(const FPSCamera& camera, std::vector<Light> lights);
 
 		CutterType GetType() const { return m_Type; }
 

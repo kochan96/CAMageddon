@@ -6,8 +6,6 @@ namespace CAMageddon
 {
 	struct HeightMapSpecification
 	{
-		float Width;
-		float Height;
 		int WidthCount;
 		int HeightCount;
 		float Value;
@@ -22,9 +20,6 @@ namespace CAMageddon
 		int GetTextureWidth() const { return m_TextureWidth; }
 		int GetTextureHeight() const { return m_TextureHeight; }
 
-		float GetWidth() const { return m_Width; }
-		float GetHeight() const { return m_Height; }
-
 		float GetHeightValue(int row, int column) const;
 		void SetHeightValue(int row, int column, float value);
 
@@ -36,8 +31,6 @@ namespace CAMageddon
 		void InitTexture();
 
 	private:
-		float m_Width, m_Height;
-		
 		unsigned int m_TextureID;
 		int m_TextureWidth, m_TextureHeight;
 		

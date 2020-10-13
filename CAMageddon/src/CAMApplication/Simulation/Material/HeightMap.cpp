@@ -6,8 +6,6 @@ namespace CAMageddon
 {
 	HeightMap::HeightMap(HeightMapSpecification specification)
 	{
-		m_Width = MilimetersGLConverter::MilimetersToGL(specification.Width);
-		m_Height = MilimetersGLConverter::MilimetersToGL(specification.Height);
 		m_TextureWidth = specification.WidthCount;
 		m_TextureHeight = specification.HeightCount;
 

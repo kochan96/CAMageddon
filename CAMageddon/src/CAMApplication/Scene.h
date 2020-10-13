@@ -11,6 +11,13 @@
 
 namespace CAMageddon
 {
+	struct Light
+	{
+		glm::vec3 Position = { 2.0f, 2.0f, 3.0f };
+		glm::vec3 Ambient = { 1.0f,1.0f,1.0f };
+		glm::vec3 Diffuse = { 1.0f,1.0f,1.0f };
+		glm::vec3 Specular = { 1.0f,1.0f,1.0f };
+	};
 
 	struct RenderOptions
 	{
@@ -18,7 +25,7 @@ namespace CAMageddon
 		bool RenderMaterial = true;
 		bool RenderLight = true;
 		bool RenderCutter = true;
-		bool RenderTrajectory = true;
+		bool RenderTrajectory = false;
 	};
 
 	class Scene
@@ -40,11 +47,16 @@ namespace CAMageddon
 
 		bool IsSimulationReady() const { return m_Simulation->IsReady(); }
 		bool IsSimulationPaused() const { return m_Simulation->IsPaused(); }
-		bool IsSimulationRunning() const {return  m_Simulation->IsRunning(); }
+		bool IsSimulationRunning() const { return  m_Simulation->IsRunning(); }
 
 		void StartSimulation() const { m_Simulation->Start(); }
 		void PauseSimulation() const { m_Simulation->Pause(); }
 		void FastForwardSimulation() const { m_Simulation->FastForward(); }
+
+		std::vector<Light>& GetLights() { return m_Lights; }
+		void AddLight() { m_Lights.push_back(Light()); }
+
+		float GetSimulationProgress() const { return m_Simulation->GetProgress(); }
 
 	private:
 		void LoadShaders();
@@ -59,9 +71,7 @@ namespace CAMageddon
 		void InitTrajectory(const std::vector<Instruction>& instructions);
 
 		void RenderPlane();
-		void RenderMaterial();
 		void RenderLight();
-		void RenderCutter();
 		void RenderTrajectory();
 
 	private:
@@ -77,5 +87,7 @@ namespace CAMageddon
 		Ref<OpenGLVertexArray> m_CutterVertexArray;
 		Ref<OpenGLVertexArray> m_TrajectoryVertexArray;
 		int trajectoryCount = 0;
+
+		std::vector<Light> m_Lights;
 	};
 }

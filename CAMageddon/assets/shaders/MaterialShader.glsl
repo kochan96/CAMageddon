@@ -12,6 +12,7 @@ uniform mat4 u_ModelMatrix;
 
 uniform sampler2D u_HeightMap;
 
+
 out vec3 v_Normal;
 out vec3 v_FragPos;
 out vec2 v_TexCoord;
@@ -19,16 +20,18 @@ out vec2 v_TexCoord;
 
 vec3 CalculateNormalFromHeightMap()
 {
-    float height = texture(u_HeightMap, a_TexCoord).r;
+    const vec2 size = vec2(2.0,0.0);
+    const ivec3 off = ivec3(-1,0,1);
+
     float heightTop = textureOffset(u_HeightMap, a_TexCoord, ivec2(0, 1)).r;
     float heightBottom = textureOffset(u_HeightMap, a_TexCoord, ivec2(0, -1)).r;
     float heightRight = textureOffset(u_HeightMap, a_TexCoord, ivec2(1, 0)).r;
     float heightLeft = textureOffset(u_HeightMap, a_TexCoord, ivec2(-1, 0)).r;
 
-    vec3 va = normalize(vec3(2.0f, heightRight - heightLeft, 0.0f));
-    vec3 vb = normalize(vec3(0.0f, heightTop - heightBottom, -2.0f));
+    vec3 vx = normalize(vec3(2.0f,0.0f,heightRight-heightLeft));
+    vec3 vy = normalize(vec3(0.0f,2.0f,heightTop-heightBottom));
 
-    return vec3(0.0f,height,0.0f);
+    return cross(vx,vy);
 }
 
 void main()
@@ -36,9 +39,11 @@ void main()
     float height = texture(u_HeightMap, a_TexCoord).r;
     vec3 position = a_Position + vec3(0.0f, 0.0f, height);
     gl_Position = u_ViewProjectionMatrix * u_ModelMatrix * vec4(position, 1.0f);
-    
+ 
+    vec3 normal = CalculateNormalFromHeightMap();
+
     v_FragPos = vec3(u_ModelMatrix * vec4(position, 1.0f));
-    v_Normal = mat3(transpose(inverse(u_ModelMatrix))) * a_Normal;
+    v_Normal = mat3(transpose(inverse(u_ModelMatrix))) * normal;
     v_TexCoord = a_TexCoord;
 }
 

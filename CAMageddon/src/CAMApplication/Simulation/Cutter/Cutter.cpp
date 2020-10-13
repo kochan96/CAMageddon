@@ -5,6 +5,8 @@
 #include "Rendering/Primitives/PrimitvesFactory.h"
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "../../Scene.h"
+
 namespace CAMageddon
 {
 	Cutter::Cutter(CutterType type, float diameter)
@@ -30,7 +32,7 @@ namespace CAMageddon
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 	}
 
-	void Cutter::Render(const FPSCamera& camera, const glm::vec3 lightPos)
+	void Cutter::Render(const FPSCamera& camera, std::vector<Light> lights)
 	{
 		auto shader = AssetsLibrary::Get().GetShader(AssetsConstants::CutterShader);
 		shader->Bind();
@@ -40,15 +42,15 @@ namespace CAMageddon
 		shader->UploadUniformFloat3("u_ViewPosition", camera.GetPosition());
 
 		//LIGHTS
-		shader->UploadUniformInt("u_PointlightCount", 1);
-		shader->UploadUniformFloat3("u_PointLights[0].position", lightPos);
+		shader->UploadUniformInt("u_PointlightCount", lights.size());
+		for (int i = 0; i < lights.size(); i++)
+		{
 
-		auto diffuseColor = lightColor * glm::vec3(0.5f);
-		auto ambientColor = diffuseColor * glm::vec3(0.2f);
-		auto specularColor = glm::vec3(1.0f);
-		shader->UploadUniformFloat3("u_PointLights[0].ambient", ambientColor);
-		shader->UploadUniformFloat3("u_PointLights[0].diffuse", diffuseColor);
-		shader->UploadUniformFloat3("u_PointLights[0].specular", specularColor);
+			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].position", lights[i].Position);
+			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].ambient", lights[i].Ambient);
+			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].diffuse", lights[i].Diffuse);
+			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].specular", lights[i].Specular);
+		}
 
 		//MATERIAL
 		const int materialDiffuseTextureSlot = 0;

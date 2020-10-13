@@ -118,7 +118,7 @@ namespace CAMageddon
 	VerticesIndicesBufferData<VertexNT> PrimitiveFactory::CreateFlatPlaneVerticesNormalsTexture(float width, float height, int widthCount, int heightCount)
 	{
 		//TODO use vertices and indexes
-		const glm::vec3 normal = glm::vec3(0.0f, 1.0f, 0.0f);
+		const glm::vec3 normal = glm::vec3(0.0f, 0.0f, 1.0f);
 		std::vector<VertexNT> vertices;
 		std::vector<uint32_t> indices;
 

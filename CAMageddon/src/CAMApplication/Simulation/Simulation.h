@@ -17,10 +17,23 @@ namespace CAMageddon
 		NONE = 0, MAX_DEPTH_REACHED = 1, FLAT_CUTTER_DOWN = 2
 	};
 
+
+	struct CutterMovementEquation
+	{
+		glm::vec3 CurrentPosition = { 0.0f,0.0f,0.0f };
+		glm::vec3 NextPosition = { 0.0f,0.0f,0.0f };
+		glm::vec3 Velocity = { 0.0f,0.0f,0.0f }; //next-curent normalize;
+
+		float VelocityValue = 250;  //250mm/s
+		float Distance = 0.0f;
+		float TotalTime = 0.0f; // distance/velocity
+		float ActualTime = 0.0f;
+	};
+
 	class CuttingSimulation
 	{
 	public:
-		CuttingSimulation() {}
+		CuttingSimulation();
 
 		void SetCutter(Ref<Cutter> cutter);
 		void SetMaterial(Ref<Material> material);
@@ -41,10 +54,19 @@ namespace CAMageddon
 		bool HasError() const { return m_State == SimulationState::SIMULATION_ERROR; }
 		CuttingError GetError() const { return m_Error; }
 
+		float GetProgress() const;
+
+	private:
+		void CutMaterial(glm::vec3 cutterPreviousPosition, glm::vec3 cutterNextPosition);
+		glm::vec3 GetNextCutterPosition(float dt); //milimeters
+
 	private:
 		Ref<Cutter> m_Cutter;
 		Ref<Material> m_Material;
+
+		int m_CurrentInstruction = 0;
 		std::vector<Instruction> m_Instructions;
+		CutterMovementEquation m_CutterMovementEquation;
 
 		CuttingError m_Error = CuttingError::NONE;
 		SimulationState m_State = SimulationState::MATERIAL_NOT_ASSIGNED;

@@ -79,6 +79,61 @@ namespace CAMageddon
 		ImGui::Begin("Debug");
 		auto framerate = ImGui::GetIO().Framerate;
 		ImGui::Text("Application framerate %.2f", framerate);
+
+
+		if (ImGui::TreeNode("RenderOptions"))
+		{
+
+			auto& renderOptions = m_Scene->GetRenderOptions();
+
+			ImGui::Checkbox("Render Plane", &renderOptions.RenderPlane);
+			ImGui::Checkbox("Render Material", &renderOptions.RenderMaterial);
+			ImGui::Checkbox("Render Light", &renderOptions.RenderLight);
+			ImGui::Checkbox("Render Path", &renderOptions.RenderTrajectory);
+			ImGui::Checkbox("Render Cutter", &renderOptions.RenderCutter);
+
+			ImGui::TreePop();
+		}
+
+		if (ImGui::TreeNode("Lights"))
+		{
+			auto& lights = m_Scene->GetLights();
+			for (int i = 0; i < lights.size(); i++)
+			{
+				auto id = "Light " + std::to_string(i);
+				if (ImGui::TreeNode(id.c_str()))
+				{
+					auto position = lights[i].Position;
+					if (ImGui::DragFloat3("Position", &position.x, 0.2f))
+					{
+						lights[i].Position = position;
+					}
+
+					auto ambientColor = lights[i].Ambient;
+					if (ImGui::ColorEdit3("Ambient", &ambientColor.x))
+					{
+						lights[i].Ambient = ambientColor;
+					}
+
+					auto diffuseColor = lights[i].Diffuse;
+					if (ImGui::ColorEdit3("Diffuse", &diffuseColor.x))
+					{
+						lights[i].Diffuse = diffuseColor;
+					}
+
+					auto specularColor = lights[i].Specular;
+					if (ImGui::ColorEdit3("Specular", &specularColor.x))
+					{
+						lights[i].Specular = specularColor;
+					}
+
+					ImGui::TreePop();
+				}
+			}
+
+			ImGui::TreePop();
+		}
+
 		ImGui::End();
 	}
 
@@ -103,18 +158,28 @@ namespace CAMageddon
 
 		if (ImGui::TreeNode("Simulation Controls"))
 		{
-			if (ImGui::Button("Start"))
+			if (m_Scene->IsSimulationRunning())
 			{
-				m_Scene->StartSimulation();
+				if (ImGui::Button("Pause"))
+				{
+					m_Scene->PauseSimulation();
+				}
+
+				if (ImGui::Button("FastForward"))
+				{
+					m_Scene->FastForwardSimulation();
+				}
+
+				ImGui::ProgressBar(m_Scene->GetSimulationProgress());
 			}
-			if (ImGui::Button("Pause"))
+			else
 			{
-				m_Scene->PauseSimulation();
+				if (ImGui::Button("Start"))
+				{
+					m_Scene->StartSimulation();
+				}
 			}
-			if (ImGui::Button("FastForward"))
-			{
-				m_Scene->FastForwardSimulation();
-			}
+
 
 			ImGui::TreePop();
 		}
