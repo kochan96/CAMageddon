@@ -36,8 +36,8 @@ namespace CAMageddon
 		float m_AspectRation;
 		FPSCamera m_Camera;
 
-		glm::vec3 m_CameraPosition = { 0.0f,-15.0f,2.0f };
-		glm::vec2 m_CameraRotation = { 0.0f,0.0f };
+		glm::vec3 m_CameraPosition = { 160.0f,0.0f,120.0f };
+		glm::vec2 m_CameraRotation = { glm::radians(-45.0f),glm::radians(90.0f) };
 		glm::vec2 lastMousePos = { 0.0f,0.0f };
 
 		float m_CameraTranslationSpeed = 5.0f;

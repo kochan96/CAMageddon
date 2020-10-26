@@ -75,6 +75,7 @@ namespace CAMageddon
 		}
 
 		m_State = SimulationState::RUNNING;
+		m_Error = CuttingError::NONE;
 
 		auto startPositon = MilimetersGLConverter::MilimetersToGL(m_Instructions[0].GetPosition());
 		m_Cutter->SetPosition(startPositon);
@@ -82,7 +83,8 @@ namespace CAMageddon
 		m_CurrentInstruction = 0;
 		m_CutterMovementEquation.ActualTime = 0.0f;
 		m_CutterMovementEquation.CurrentPosition = m_Instructions[m_CurrentInstruction].GetPosition();
-		m_CutterMovementEquation.NextPosition = m_Instructions[m_CurrentInstruction + 1].GetPosition();
+		int nextInstruction = m_CurrentInstruction + 1;
+		m_CutterMovementEquation.NextPosition = m_Instructions[nextInstruction].GetPosition();
 		m_CutterMovementEquation.Distance = glm::distance(m_CutterMovementEquation.CurrentPosition, m_CutterMovementEquation.NextPosition);
 		m_CutterMovementEquation.VelocityValue = 250.0f; //250mm/s
 		m_CutterMovementEquation.Velocity = m_CutterMovementEquation.VelocityValue * glm::normalize(m_CutterMovementEquation.NextPosition - m_CutterMovementEquation.CurrentPosition);
@@ -92,6 +94,17 @@ namespace CAMageddon
 	void CuttingSimulation::Pause()
 	{
 		m_State = SimulationState::PAUSED;
+	}
+
+	void CuttingSimulation::Resume()
+	{
+		if (!IsPaused())
+		{
+			LOG_ERROR("Try to resume not paused");
+			return;
+		}
+
+		m_State = SimulationState::RUNNING;
 	}
 
 	void CuttingSimulation::Update(Timestep ts)
@@ -106,10 +119,15 @@ namespace CAMageddon
 
 		auto dt = m_DeltaTime;
 		auto frameTime = ts * m_SimulationSpeed;
-		while (frameTime > 0.0f)
+		while (frameTime > 0.0f && !HasError())
 		{
 			float deltaTime = std::min(frameTime, dt);
 			nextPosition = GetNextCutterPosition(deltaTime);
+			if (CheckForErrors(previousPosition, nextPosition))
+			{
+				break;
+			}
+
 			CutMaterial(previousPosition, nextPosition);
 			frameTime = frameTime - deltaTime;
 			previousPosition = nextPosition;
@@ -137,6 +155,8 @@ namespace CAMageddon
 
 	void CuttingSimulation::CutFlat(glm::vec3 previousPosition, glm::vec3 cutterNextPosition)
 	{
+		bool wentDown = cutterNextPosition.z < previousPosition.z;
+
 		auto cutterRadius = m_Cutter->GetRadius();
 		auto cutterHeight = cutterNextPosition.z;
 		auto cutterTestPosition = glm::vec2(cutterNextPosition.x, cutterNextPosition.y);
@@ -155,6 +175,14 @@ namespace CAMageddon
 				if (glm::dot(position2, position2) <= (cutterRadius * cutterRadius))
 				{
 					auto materialHeight = m_Material->GetHeigth(row, column);
+					if (wentDown && materialHeight > cutterHeight)
+					{
+						m_State = SimulationState::SIMULATION_ERROR;
+						m_Error = CuttingError::FLAT_CUTTER_DOWN;
+						LOG_ERROR("Flat cutter down");
+						return;
+					}
+
 					m_Material->SetHeight(row, column, std::min(materialHeight, cutterHeight));
 				}
 			}
@@ -228,17 +256,36 @@ namespace CAMageddon
 		return m_CutterMovementEquation.CurrentPosition + m_CutterMovementEquation.Velocity * m_CutterMovementEquation.ActualTime;
 	}
 
+	bool CuttingSimulation::CheckForErrors(glm::vec3 previousPosition, glm::vec3 nextPosition)
+	{
+		auto max = m_Material->GetMaxHeight() - m_Material->GetMaxDepth();
+		if (nextPosition.z < max)
+		{
+			//Max Depth reached
+			LOG_ERROR("Max Depth reached");
+			m_State = SimulationState::SIMULATION_ERROR;
+			m_Error = CuttingError::MAX_DEPTH_REACHED;
+			return true;
+		}
+
+		return false;
+	}
+
 	void CuttingSimulation::FastForward()
 	{
 
 		glm::vec3 previousPosition = MilimetersGLConverter::GLToMilimeters(m_Cutter->GetPosition());
 		glm::vec3 nextPosition = previousPosition;
 
-		while (IsRunning())
+		while (IsRunning() || IsPaused())
 		{
 			nextPosition = GetNextCutterPosition(m_DeltaTime);
-			CutMaterial(previousPosition, nextPosition);
-			previousPosition = nextPosition;
+			if (!CheckForErrors(previousPosition, nextPosition))
+			{
+				CutMaterial(previousPosition, nextPosition);
+				previousPosition = nextPosition;
+			}
+
 		}
 
 		m_Material->Update();

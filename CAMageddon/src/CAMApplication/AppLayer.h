@@ -21,6 +21,8 @@ namespace CAMageddon
 	private:
 		void RenderDebugWindow();
 		void RenderSimulationControl();
+		void RenderMaterialEdit();
+		void RenderCutterInfo();
 		void RenderViewport();
 
 	private:

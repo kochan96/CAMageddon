@@ -45,6 +45,7 @@ namespace CAMageddon
 
 		void StartSimulation() const { m_Simulation->Start(); }
 		void PauseSimulation() const { m_Simulation->Pause(); }
+		void ResumeSimulation() const { m_Simulation->Resume(); }
 		void FastForwardSimulation() const { m_Simulation->FastForward(); }
 
 		std::vector<Light>& GetLights() { return m_Lights; }
@@ -71,7 +72,7 @@ namespace CAMageddon
 		void RenderTrajectory();
 
 	private:
-		float m_PlaneHeight = 0.0f;
+		float m_PlaneHeight = 10.0f;
 
 		Scope<CuttingSimulation> m_Simulation;
 		Ref<Material> m_Material;

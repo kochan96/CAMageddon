@@ -196,12 +196,32 @@ namespace CAMageddon
 				float speed = m_Scene->GetSimulationSpeed();
 				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 2.0f))
 				{
+					speed = std::clamp(speed, 0.1f, 2.0f);
 					m_Scene->SetSimulationSpeed(speed);
 				}
 
 				ImGui::ProgressBar(m_Scene->GetSimulationProgress());
 			}
-			else
+			else if (m_Scene->IsSimulationPaused())
+			{
+				if (ImGui::Button("Resume"))
+				{
+					m_Scene->ResumeSimulation();
+				}
+
+				if (ImGui::Button("FastForward"))
+				{
+					m_Scene->FastForwardSimulation();
+				}
+
+				float speed = m_Scene->GetSimulationSpeed();
+				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 2.0f))
+				{
+					speed = std::clamp(speed, 0.1f, 2.0f);
+					m_Scene->SetSimulationSpeed(speed);
+				}
+			}
+			else if (m_Scene->IsSimulationReady())
 			{
 				if (ImGui::Button("Start"))
 				{
@@ -211,13 +231,91 @@ namespace CAMageddon
 				float speed = m_Scene->GetSimulationSpeed();
 				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 2.0f))
 				{
+					speed = std::clamp(speed, 0.1f, 2.0f);
 					m_Scene->SetSimulationSpeed(speed);
 				}
+			}
+			else
+			{
+				ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.6f, 0.4f, 1.0f));
+				ImGui::Text("Load simulation first");
+				ImGui::PopStyleColor();
 			}
 
 			ImGui::TreePop();
 		}
 
+
+		RenderCutterInfo();
+		RenderMaterialEdit();
+
+		ImGui::End();
+	}
+
+	void AppLayer::RenderMaterialEdit()
+	{
+		if (ImGui::TreeNode("Material"))
+		{
+			if (m_Scene->IsSimulationRunning() || m_Scene->IsSimulationPaused())
+			{
+				ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.6f, 0.4f, 1.0f));
+				ImGui::Text("Simulation is running or paused");
+				ImGui::Text("Cannot edit material");
+				ImGui::PopStyleColor();
+
+				ImGui::TreePop();
+				return;
+			}
+
+			auto material = m_Scene->GetMaterial();
+			if (material)
+			{
+				auto& materialSpec = material->GetSpecification();
+
+				if (ImGui::DragFloat("MaxDepth", &materialSpec.MaxDepth, 1.0f, 0.0f, materialSpec.SizeZ))
+				{
+					materialSpec.MaxDepth = std::clamp(materialSpec.MaxDepth, 0.0f, materialSpec.SizeZ);
+				}
+
+				if (ImGui::DragFloat("Width", &materialSpec.SizeX, 1.0f, 10.0f, 500.0f))
+				{
+					materialSpec.SizeX = std::clamp(materialSpec.SizeX, 10.0f, 500.0f);
+				}
+
+				if (ImGui::DragInt("Width Precision", &materialSpec.PrecisionX, 1.0f, 300, 1000))
+				{
+					materialSpec.PrecisionX = std::clamp(materialSpec.PrecisionX, 300, 1000);
+				}
+
+				if (ImGui::DragFloat("Length", &materialSpec.SizeY, 1.0f, 10.0f, 500.0f))
+				{
+					materialSpec.SizeY = std::clamp(materialSpec.SizeY, 10.0f, 500.0f);
+				}
+
+				if (ImGui::DragInt("Length Precision", &materialSpec.PrecisionY, 1.0f, 300, 1000))
+				{
+					materialSpec.PrecisionY = std::clamp(materialSpec.PrecisionY, 300, 1000);
+				}
+
+				if (ImGui::DragFloat("Height", &materialSpec.SizeZ, 1.0f, 10.0f, 500.0f))
+				{
+					materialSpec.SizeZ = std::clamp(materialSpec.SizeZ, 10.0f, 500.0f);
+				}
+
+				if (ImGui::Button("Reset"))
+				{
+					auto material = CreateRef<Material>(materialSpec);
+					m_Scene->SetMaterial(material);
+					m_Scene->SetPlaneHeight(materialSpec.SizeZ - materialSpec.MaxDepth);
+				}
+			}
+
+			ImGui::TreePop();
+		}
+	}
+
+	void AppLayer::RenderCutterInfo()
+	{
 		if (ImGui::TreeNode("Cutter"))
 		{
 			auto cutter = m_Scene->GetCutter();
@@ -228,43 +326,13 @@ namespace CAMageddon
 			}
 			else
 			{
+				ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.6f, 0.4f, 1.0f));
 				ImGui::Text("Load Cutter First");
+				ImGui::PopStyleColor();
 			}
 
 			ImGui::TreePop();
 		}
-
-		if (ImGui::TreeNode("Material"))
-		{
-			auto material = m_Scene->GetMaterial();
-			if (material)
-			{
-				auto& materialSpec = material->GetSpecification();
-
-				if (ImGui::DragFloat("MaxDepth", &materialSpec.MaxDepth, 1.0f))
-				{
-					m_Scene->SetPlaneHeight(materialSpec.SizeZ - materialSpec.MaxDepth);
-				}
-
-				ImGui::DragFloat("Width", &materialSpec.SizeX, 1.0f);
-				ImGui::DragInt("Width Precision", &materialSpec.PrecisionX);
-				ImGui::DragFloat("Length", &materialSpec.SizeY, 1.0f);
-				ImGui::DragInt("Length Precision", &materialSpec.PrecisionY);
-
-				ImGui::DragFloat("Height", &materialSpec.SizeZ);
-
-				if (ImGui::Button("Reset"))
-				{
-					auto material = CreateRef<Material>(materialSpec);
-					m_Scene->SetMaterial(material);
-				}
-
-			}
-
-			ImGui::TreePop();
-		}
-
-		ImGui::End();
 	}
 
 	void AppLayer::RenderViewport()

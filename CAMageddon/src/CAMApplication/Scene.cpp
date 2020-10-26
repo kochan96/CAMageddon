@@ -15,7 +15,7 @@ namespace CAMageddon
 
 	Scene::Scene(FPSCamera& camera) : m_Camera(camera)
 	{
-		glm::vec3 lightPosition = { 0.0f, 0.0f, 20.0f };
+		glm::vec3 lightPosition = { 0.0f, -35.0f, 200.0f };
 		glm::vec3 lightDirection = glm::normalize(glm::vec3(0) - lightPosition);
 		Light light(lightPosition, lightDirection);
 		light.LightType = LightType::Directional;

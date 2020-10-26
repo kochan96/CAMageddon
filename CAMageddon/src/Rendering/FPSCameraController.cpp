@@ -13,6 +13,8 @@ namespace CAMageddon
 	FPSCameraController::FPSCameraController(float fov, float aspectRatio, float nearClipPlane, float farClipPlane)
 		:m_AspectRation(aspectRatio), m_Fov(fov), m_Camera(fov, aspectRatio, nearClipPlane, farClipPlane)
 	{
+		m_Camera.SetPosition(m_CameraPosition);
+		m_Camera.SetRotation(m_CameraRotation);
 	}
 
 

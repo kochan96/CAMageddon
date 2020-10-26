@@ -9,7 +9,7 @@ namespace CAMageddon
 {
 	enum class SimulationState
 	{
-		READY = 0, RUNNING = 1, PAUSED = 3, FINSHED = 2, SIMULATION_ERROR = 3, CUTTER_NOT_ASSIGNED = 4, MATERIAL_NOT_ASSIGNED = 5, INSTRUCTIONS_NOT_ASSINGED = 6,
+		READY = 0, RUNNING = 1, PAUSED = 2, FINSHED = 3, SIMULATION_ERROR = 4, CUTTER_NOT_ASSIGNED = 5, MATERIAL_NOT_ASSIGNED = 6, INSTRUCTIONS_NOT_ASSINGED = 7,
 	};
 
 	enum class CuttingError
@@ -41,6 +41,7 @@ namespace CAMageddon
 
 		void Start();
 		void Pause();
+		void Resume();
 		void Update(Timestep ts);
 		void FastForward();
 
@@ -61,6 +62,8 @@ namespace CAMageddon
 		void CutFlat(glm::vec3 previousPosition, glm::vec3 cutterNextPosition);
 		void CutSphere(glm::vec3 previousPosition, glm::vec3 cutterNextPosition);
 		glm::vec3 GetNextCutterPosition(float dt); //milimeters
+
+		bool CheckForErrors(glm::vec3 previousPosition, glm::vec3 nextPosition);
 
 	private:
 		Ref<Cutter> m_Cutter;
