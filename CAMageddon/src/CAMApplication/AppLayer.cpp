@@ -74,6 +74,49 @@ namespace CAMageddon
 		RenderViewport();
 	}
 
+	static void RenderPointLightEdit(Light& light)
+	{
+		ImGui::DragFloat3("Position", &light.Position.x, 0.1f);
+		ImGui::ColorEdit3("Ambient", &light.Ambient.x);
+		ImGui::ColorEdit3("Diffuse", &light.Diffuse.x);
+		ImGui::ColorEdit3("Specular", &light.Specular.x);
+
+		ImGui::Checkbox("Attenuation", &light.AttenuationEnabled);
+		if (light.AttenuationEnabled)
+		{
+			ImGui::DragFloat("Linear", &light.Linear);
+			ImGui::DragFloat("Quadratic", &light.Quadratic);
+		}
+	}
+
+	static void RenderDirLightEdit(Light& light)
+	{
+		if (ImGui::DragFloat3("Position", &light.Position.x, 0.1f))
+		{
+			light.Direction = glm::normalize(glm::vec3(0) - light.Position);
+		}
+		ImGui::ColorEdit3("Ambient", &light.Ambient.x);
+		ImGui::ColorEdit3("Diffuse", &light.Diffuse.x);
+		ImGui::ColorEdit3("Specular", &light.Specular.x);
+	}
+
+	static void RenderSpotLightEdit(Light& light)
+	{
+
+	}
+
+	static void RenderLightEdit(Light& light)
+	{
+		//TODO edit for lights types;
+
+		if (light.LightType == LightType::Point)
+			RenderPointLightEdit(light);
+		else if (light.LightType == LightType::Directional)
+			RenderDirLightEdit(light);
+		else if (light.LightType == LightType::Spot)
+			RenderSpotLightEdit(light);
+	}
+
 	void AppLayer::RenderDebugWindow()
 	{
 		ImGui::Begin("Debug");
@@ -100,35 +143,15 @@ namespace CAMageddon
 			auto& lights = m_Scene->GetLights();
 			for (int i = 0; i < lights.size(); i++)
 			{
-				auto id = "Light " + std::to_string(i);
-				if (ImGui::TreeNode(id.c_str()))
+				ImGui::PushID(i);
+				if (ImGui::TreeNode(lights[i].Name.c_str()))
 				{
-					auto position = lights[i].Position;
-					if (ImGui::DragFloat3("Position", &position.x, 0.2f))
-					{
-						lights[i].Position = position;
-					}
-
-					auto ambientColor = lights[i].Ambient;
-					if (ImGui::ColorEdit3("Ambient", &ambientColor.x))
-					{
-						lights[i].Ambient = ambientColor;
-					}
-
-					auto diffuseColor = lights[i].Diffuse;
-					if (ImGui::ColorEdit3("Diffuse", &diffuseColor.x))
-					{
-						lights[i].Diffuse = diffuseColor;
-					}
-
-					auto specularColor = lights[i].Specular;
-					if (ImGui::ColorEdit3("Specular", &specularColor.x))
-					{
-						lights[i].Specular = specularColor;
-					}
+					RenderLightEdit(lights[i]);
 
 					ImGui::TreePop();
 				}
+
+				ImGui::PopID();
 			}
 
 			ImGui::TreePop();
@@ -170,6 +193,12 @@ namespace CAMageddon
 					m_Scene->FastForwardSimulation();
 				}
 
+				float speed = m_Scene->GetSimulationSpeed();
+				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 2.0f))
+				{
+					m_Scene->SetSimulationSpeed(speed);
+				}
+
 				ImGui::ProgressBar(m_Scene->GetSimulationProgress());
 			}
 			else
@@ -178,8 +207,13 @@ namespace CAMageddon
 				{
 					m_Scene->StartSimulation();
 				}
-			}
 
+				float speed = m_Scene->GetSimulationSpeed();
+				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 2.0f))
+				{
+					m_Scene->SetSimulationSpeed(speed);
+				}
+			}
 
 			ImGui::TreePop();
 		}
@@ -194,7 +228,7 @@ namespace CAMageddon
 			}
 			else
 			{
-
+				ImGui::Text("Load Cutter First");
 			}
 
 			ImGui::TreePop();
@@ -205,7 +239,26 @@ namespace CAMageddon
 			auto material = m_Scene->GetMaterial();
 			if (material)
 			{
-				ImGui::Text("Material loaded");
+				auto& materialSpec = material->GetSpecification();
+
+				if (ImGui::DragFloat("MaxDepth", &materialSpec.MaxDepth, 1.0f))
+				{
+					m_Scene->SetPlaneHeight(materialSpec.SizeZ - materialSpec.MaxDepth);
+				}
+
+				ImGui::DragFloat("Width", &materialSpec.SizeX, 1.0f);
+				ImGui::DragInt("Width Precision", &materialSpec.PrecisionX);
+				ImGui::DragFloat("Length", &materialSpec.SizeY, 1.0f);
+				ImGui::DragInt("Length Precision", &materialSpec.PrecisionY);
+
+				ImGui::DragFloat("Height", &materialSpec.SizeZ);
+
+				if (ImGui::Button("Reset"))
+				{
+					auto material = CreateRef<Material>(materialSpec);
+					m_Scene->SetMaterial(material);
+				}
+
 			}
 
 			ImGui::TreePop();

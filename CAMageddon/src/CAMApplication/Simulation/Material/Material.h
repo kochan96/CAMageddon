@@ -2,6 +2,8 @@
 #include "HeightMap.h"
 #include "Rendering/VertexArray.h"
 #include <glm/glm.hpp>
+#include <CAMApplication/Light.h>
+
 
 namespace CAMageddon
 {
@@ -17,14 +19,16 @@ namespace CAMageddon
 		int PrecisionY; //textureHeight
 	};
 
-	struct Index
+	struct BoundingIndices
 	{
-		int Row;
-		int Column;
+		int StartRow;
+		int EndRow;
+
+		int StartColumn;
+		int EndColumn;
 	};
 
 	class FPSCamera;
-	struct Light;
 
 	class Material
 	{
@@ -32,7 +36,7 @@ namespace CAMageddon
 		Material();
 		Material(const MaterialSpecifiaction& specification);
 
-		const MaterialSpecifiaction& GetSpecification() { return m_Specification; }
+		MaterialSpecifiaction& GetSpecification() { return m_Specification; }
 		void SetSpecification(const MaterialSpecifiaction& specification) { m_Specification = specification; Init(); }
 
 		void Render(const FPSCamera& camera, std::vector<Light> lights);
@@ -47,7 +51,7 @@ namespace CAMageddon
 		void SetHeight(int row, int column, float value);
 		glm::vec2 GetPosition(int row, int column);
 
-		std::vector<Index> GetIndices(glm::vec2 leftBottom, glm::vec2 rightTop);
+		BoundingIndices GetIndices(glm::vec2 leftBottom, glm::vec2 rightTop);
 
 		void Update();
 

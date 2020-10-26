@@ -2,7 +2,7 @@
 
 namespace CAMageddon
 {
-	float MillimeterToGLScale = 0.009f;
+	float MillimeterToGLScale = 1.0f;
 
 	glm::vec2 MilimetersGLConverter::MilimetersToGL(const glm::vec2& mm_vec)
 	{

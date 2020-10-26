@@ -57,7 +57,9 @@ namespace CAMageddon
 		float GetProgress() const;
 
 	private:
-		void CutMaterial(glm::vec3 cutterPreviousPosition, glm::vec3 cutterNextPosition);
+		void CutMaterial(glm::vec3 previousPosition, glm::vec3 cutterNextPosition);
+		void CutFlat(glm::vec3 previousPosition, glm::vec3 cutterNextPosition);
+		void CutSphere(glm::vec3 previousPosition, glm::vec3 cutterNextPosition);
 		glm::vec3 GetNextCutterPosition(float dt); //milimeters
 
 	private:
@@ -72,7 +74,7 @@ namespace CAMageddon
 		SimulationState m_State = SimulationState::MATERIAL_NOT_ASSIGNED;
 
 		float m_Time = 0.0f;
-		float m_DeltaTime = 0.1f;
+		float m_DeltaTime = 0.003f;
 		float m_SimulationSpeed = 1.0f;
 	};
 }

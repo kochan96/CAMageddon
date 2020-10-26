@@ -5,8 +5,6 @@
 #include "Rendering/Primitives/PrimitvesFactory.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../../Scene.h"
-
 namespace CAMageddon
 {
 	Cutter::Cutter(CutterType type, float diameter)
@@ -17,19 +15,124 @@ namespace CAMageddon
 
 	void Cutter::Init()
 	{
-		auto cutterData = PrimitiveFactory::CreateOpenCylinderVerticesNormalsTexture(MilimetersGLConverter::MilimetersToGL(GetRadius()), MilimetersGLConverter::MilimetersToGL(60), 20);
-		auto vertexBuffer = CreateRef<OpenGLVertexBuffer>((float*)cutterData.vertexBufferData.data(), cutterData.vertexBufferData.size() * sizeof(VertexNT));
-		vertexBuffer->SetLayout({
+		if (m_Type == CutterType::FLAT)
+			InitFlat();
+		else
+			InitSphere();
+	}
+
+	void Cutter::InitFlat()
+	{
+		const int divisionCount = 20;
+
+		auto cutterData = PrimitiveFactory::CreateOpenCylinderVerticesNormals(MilimetersGLConverter::MilimetersToGL(GetRadius()), MilimetersGLConverter::MilimetersToGL(60), divisionCount);
+		auto cutterEndData = PrimitiveFactory::CreateFlatDiscNormals(MilimetersGLConverter::MilimetersToGL(GetRadius()), divisionCount);
+
+		auto cutterHandleVertexBuffer = CreateRef<OpenGLVertexBuffer>((float*)cutterData.vertexBufferData.data(), cutterData.vertexBufferData.size() * sizeof(VertexN));
+		cutterHandleVertexBuffer->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float3, "a_Normal"   },
-			{ ShaderDataType::Float2, "a_TexCoord" }
 			});
 
-		m_VertexArray = CreateRef<OpenGLVertexArray>();
-		m_VertexArray->AddVertexBuffer(vertexBuffer);
+		auto cutterEndVertexBuffer = CreateRef<OpenGLVertexBuffer>((float*)cutterEndData.vertexBufferData.data(), cutterEndData.vertexBufferData.size() * sizeof(VertexN));
+		cutterEndVertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float3, "a_Normal"   },
+			});
 
+		m_CutterHandleVertexArray = CreateRef<OpenGLVertexArray>();
+		m_CutterHandleVertexArray->AddVertexBuffer(cutterHandleVertexBuffer);
 		auto indexBuffer = CreateRef<OpenGLIndexBuffer>(cutterData.indexBufferData.data(), cutterData.indexBufferData.size());
-		m_VertexArray->SetIndexBuffer(indexBuffer);
+		m_CutterHandleVertexArray->SetIndexBuffer(indexBuffer);
+
+		m_CutterEndVertexArray = CreateRef<OpenGLVertexArray>();
+		m_CutterEndVertexArray->AddVertexBuffer(cutterEndVertexBuffer);
+		auto indexBuffer2 = CreateRef<OpenGLIndexBuffer>(cutterEndData.indexBufferData.data(), cutterEndData.indexBufferData.size());
+		m_CutterEndVertexArray->SetIndexBuffer(indexBuffer2);
+	}
+
+	void Cutter::InitSphere()
+	{
+		const int divisionCount = 20;
+		float glRadius = MilimetersGLConverter::MilimetersToGL(GetRadius());
+
+		auto cutterData = PrimitiveFactory::CreateOpenCylinderVerticesNormals(glRadius, MilimetersGLConverter::MilimetersToGL(60), divisionCount, glRadius);
+		auto cutterEndData = PrimitiveFactory::CreateHalfSphereVerticesNormals(glRadius, divisionCount, divisionCount, glRadius);
+
+		auto cutterHandleVertexBuffer = CreateRef<OpenGLVertexBuffer>((float*)cutterData.vertexBufferData.data(), cutterData.vertexBufferData.size() * sizeof(VertexN));
+		cutterHandleVertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float3, "a_Normal"   },
+			});
+
+		auto cutterEndVertexBuffer = CreateRef<OpenGLVertexBuffer>((float*)cutterEndData.vertexBufferData.data(), cutterEndData.vertexBufferData.size() * sizeof(VertexN));
+		cutterEndVertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float3, "a_Normal"   },
+			});
+
+		m_CutterHandleVertexArray = CreateRef<OpenGLVertexArray>();
+		m_CutterHandleVertexArray->AddVertexBuffer(cutterHandleVertexBuffer);
+		auto indexBuffer = CreateRef<OpenGLIndexBuffer>(cutterData.indexBufferData.data(), cutterData.indexBufferData.size());
+		m_CutterHandleVertexArray->SetIndexBuffer(indexBuffer);
+
+		m_CutterEndVertexArray = CreateRef<OpenGLVertexArray>();
+		m_CutterEndVertexArray->AddVertexBuffer(cutterEndVertexBuffer);
+		auto indexBuffer2 = CreateRef<OpenGLIndexBuffer>(cutterEndData.indexBufferData.data(), cutterEndData.indexBufferData.size());
+		m_CutterEndVertexArray->SetIndexBuffer(indexBuffer2);
+	}
+
+	static void AddPointLight(const Light& light, const Ref<OpenGLShader> shader, int& pointLightCount)
+	{
+		int i = pointLightCount;
+		shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].position", light.Position);
+
+		shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].ambient", light.Ambient);
+		shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].diffuse", light.Diffuse);
+		shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].specular", light.Specular);
+
+		shader->SetBool("u_PointLights[" + std::to_string(i) + "].attenuationEnabled", light.AttenuationEnabled);
+		shader->UploadUniformFloat("u_PointLights[" + std::to_string(i) + "].constant", light.Constant);
+		shader->UploadUniformFloat("u_PointLights[" + std::to_string(i) + "].linear", light.Linear);
+		shader->UploadUniformFloat("u_PointLights[" + std::to_string(i) + "].quadratic", light.Quadratic);
+
+		pointLightCount++;
+	}
+
+	static void AddDirLight(const Light& light, const Ref<OpenGLShader> shader, int& dirLightCount)
+	{
+		int i = dirLightCount;
+
+		shader->UploadUniformFloat3("u_DirLights[" + std::to_string(i) + "].direction", light.Direction);
+
+		shader->UploadUniformFloat3("u_DirLights[" + std::to_string(i) + "].ambient", light.Ambient);
+		shader->UploadUniformFloat3("u_DirLights[" + std::to_string(i) + "].diffuse", light.Diffuse);
+		shader->UploadUniformFloat3("u_DirLights[" + std::to_string(i) + "].specular", light.Specular);
+
+		dirLightCount++;
+	}
+
+	static void AddSpotLight(const Light& light, const Ref<OpenGLShader> shader, int& spotLightCount)
+	{
+		int i = spotLightCount;
+
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].position", light.Position);
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].direction", light.Direction);
+
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].ambient", light.Ambient);
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].diffuse", light.Diffuse);
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].specular", light.Specular);
+
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].cutOff", light.CutOff);
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].outerCutOff", light.OuterCutOff);
+
+
+		shader->SetBool("u_SpotLights[" + std::to_string(i) + "].attenuationEnabled", light.AttenuationEnabled);
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].constant", light.Constant);
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].linear", light.Linear);
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].quadratic", light.Quadratic);
+
+		spotLightCount++;
 	}
 
 	void Cutter::Render(const FPSCamera& camera, std::vector<Light> lights)
@@ -42,15 +145,21 @@ namespace CAMageddon
 		shader->UploadUniformFloat3("u_ViewPosition", camera.GetPosition());
 
 		//LIGHTS
-		shader->UploadUniformInt("u_PointlightCount", lights.size());
+		int pointLightCount = 0, dirLightCount = 0, spotLightCount = 0;
+
 		for (int i = 0; i < lights.size(); i++)
 		{
-
-			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].position", lights[i].Position);
-			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].ambient", lights[i].Ambient);
-			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].diffuse", lights[i].Diffuse);
-			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].specular", lights[i].Specular);
+			if (lights[i].LightType == LightType::Point)
+				AddPointLight(lights[i], shader, pointLightCount);
+			else if (lights[i].LightType == LightType::Directional)
+				AddDirLight(lights[i], shader, dirLightCount);
+			else if (lights[i].LightType == LightType::Spot)
+				AddSpotLight(lights[i], shader, spotLightCount);
 		}
+
+		shader->UploadUniformInt("u_PointlightCount", pointLightCount);
+		shader->UploadUniformInt("u_DirlightCount", dirLightCount);
+		shader->UploadUniformInt("u_SpotlightCount", spotLightCount);
 
 		//MATERIAL
 		const int materialDiffuseTextureSlot = 0;
@@ -73,8 +182,12 @@ namespace CAMageddon
 		auto worldMatrix = glm::translate(glm::mat4(1.0f), GetPosition());
 		shader->UploadUniformMat4("u_ModelMatrix", worldMatrix);
 
-		m_VertexArray->Bind();
+		m_CutterHandleVertexArray->Bind();
 
-		glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, m_CutterHandleVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
+
+		m_CutterEndVertexArray->Bind();
+
+		glDrawElements(GL_TRIANGLES, m_CutterEndVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
 	}
 }

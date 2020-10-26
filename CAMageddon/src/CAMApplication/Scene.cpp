@@ -15,8 +15,14 @@ namespace CAMageddon
 
 	Scene::Scene(FPSCamera& camera) : m_Camera(camera)
 	{
-		Light light;
-		light.Position = { 0.0f,1.0f,5.0f };
+		glm::vec3 lightPosition = { 0.0f, 0.0f, 20.0f };
+		glm::vec3 lightDirection = glm::normalize(glm::vec3(0) - lightPosition);
+		Light light(lightPosition, lightDirection);
+		light.LightType = LightType::Directional;
+		light.Ambient = glm::vec3(0.5f, 0.5f, 0.5f);
+		light.Diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
+		light.Specular = glm::vec3(1.0f, 1.0f, 1.0f);
+
 		m_Lights.push_back(light);
 	}
 
@@ -26,7 +32,6 @@ namespace CAMageddon
 		LoadTextures();
 		InitPlane();
 		InitMaterial();
-		InitCutter();
 		InitLight();
 
 		InitTrajectory(std::vector<Instruction>());
@@ -82,7 +87,6 @@ namespace CAMageddon
 	{
 		AssetsLibrary::Get().LoadTexture(AssetsConstants::MaterialDiffuseTexture, AssetsConstants::MaterialDiffuseTexturePath);
 		AssetsLibrary::Get().LoadTexture(AssetsConstants::MaterialSpecularTexture, AssetsConstants::MaterialSpecularTexturePath);
-		AssetsLibrary::Get().LoadTexture(AssetsConstants::MaterialBumpTexture, AssetsConstants::MaterialBumpTexturePath);
 	}
 
 	void Scene::InitSimulation()
@@ -110,7 +114,7 @@ namespace CAMageddon
 
 	void Scene::InitLight()
 	{
-		auto lightCube = PrimitiveFactory::CreateCubeVertices(0.1f);
+		auto lightCube = PrimitiveFactory::CreateCubeVertices(1.0f);
 		auto vertexBuffer = CreateRef<OpenGLVertexBuffer>((float*)lightCube.vertexBufferData.data(), lightCube.vertexBufferData.size() * sizeof(Vertex));
 		vertexBuffer->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
@@ -118,11 +122,6 @@ namespace CAMageddon
 
 		m_LightVertexArray = CreateRef<OpenGLVertexArray>();
 		m_LightVertexArray->AddVertexBuffer(vertexBuffer);
-	}
-
-	void Scene::InitCutter()
-	{
-		m_Cutter = CreateScope<Cutter>(CutterType::FLAT, 12);
 	}
 
 	void Scene::InitTrajectory(const std::vector<Instruction>& instructions)
@@ -152,13 +151,13 @@ namespace CAMageddon
 		if (m_RenderOptions.RenderPlane)
 			RenderPlane();
 
-		if (m_RenderOptions.RenderMaterial)
+		if (m_RenderOptions.RenderMaterial && m_Material)
 			m_Material->Render(m_Camera, m_Lights);
 
 		if (m_RenderOptions.RenderLight)
 			RenderLight();
 
-		if (m_RenderOptions.RenderCutter)
+		if (m_RenderOptions.RenderCutter && m_Cutter)
 			m_Cutter->Render(m_Camera, m_Lights);
 
 		if (m_RenderOptions.RenderTrajectory)
@@ -179,7 +178,9 @@ namespace CAMageddon
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", m_Camera.GetViewProjectionMatrix());
 
 		//WORLD TRANSFORM
-		shader->UploadUniformMat4("u_ModelMatrix", glm::scale(glm::mat4(1.0f), glm::vec3(6.0f, 6.0f, 0.0f)));
+		auto worldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0, MilimetersGLConverter::MilimetersToGL(m_PlaneHeight)));
+		auto scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(200.0f, 200.0f, 0.0f));
+		shader->UploadUniformMat4("u_ModelMatrix", worldMatrix * scaleMatrix);
 
 		glPatchParameteri(GL_PATCH_VERTICES, 4);
 		glDrawArrays(GL_PATCHES, 0, 4);

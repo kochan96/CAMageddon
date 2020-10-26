@@ -2,6 +2,7 @@
 #include <vector>
 #include <Rendering/VertexArray.h>
 #include <Rendering/Shader.h>
+#include <CAMApplication/Light.h>
 
 namespace CAMageddon
 {
@@ -11,7 +12,6 @@ namespace CAMageddon
 	};
 
 	class FPSCamera;
-	struct Light;
 
 	class Cutter
 	{
@@ -29,12 +29,15 @@ namespace CAMageddon
 
 	private:
 		void Init();
+		void InitFlat();
+		void InitSphere();
 
 	private:
 		float m_Diameter;
 		CutterType m_Type;
 		glm::vec3 m_Position = { 0.0f,0.0f,0.0f };
 
-		Ref<OpenGLVertexArray> m_VertexArray;
+		Ref<OpenGLVertexArray> m_CutterHandleVertexArray;
+		Ref<OpenGLVertexArray> m_CutterEndVertexArray;
 	};
 }

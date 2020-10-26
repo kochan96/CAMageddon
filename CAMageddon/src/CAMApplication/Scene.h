@@ -8,17 +8,11 @@
 #include "Simulation/Cutter/Cutter.h"
 #include "Simulation/Simulation.h"
 
+#include "Light.h"
+
 
 namespace CAMageddon
 {
-	struct Light
-	{
-		glm::vec3 Position = { 2.0f, 2.0f, 3.0f };
-		glm::vec3 Ambient = { 1.0f,1.0f,1.0f };
-		glm::vec3 Diffuse = { 1.0f,1.0f,1.0f };
-		glm::vec3 Specular = { 1.0f,1.0f,1.0f };
-	};
-
 	struct RenderOptions
 	{
 		bool RenderPlane = true;
@@ -54,9 +48,12 @@ namespace CAMageddon
 		void FastForwardSimulation() const { m_Simulation->FastForward(); }
 
 		std::vector<Light>& GetLights() { return m_Lights; }
-		void AddLight() { m_Lights.push_back(Light()); }
 
 		float GetSimulationProgress() const { return m_Simulation->GetProgress(); }
+		float GetSimulationSpeed() const { return m_Simulation->GetSimulationSpeed(); }
+		void SetSimulationSpeed(float simulationSpeed) { m_Simulation->SetSimulationSpeed(simulationSpeed); }
+
+		void SetPlaneHeight(float height) { m_PlaneHeight = height; }
 
 	private:
 		void LoadShaders();
@@ -67,7 +64,6 @@ namespace CAMageddon
 		void InitPlane();
 		void InitMaterial();
 		void InitLight();
-		void InitCutter();
 		void InitTrajectory(const std::vector<Instruction>& instructions);
 
 		void RenderPlane();
@@ -75,6 +71,8 @@ namespace CAMageddon
 		void RenderTrajectory();
 
 	private:
+		float m_PlaneHeight = 0.0f;
+
 		Scope<CuttingSimulation> m_Simulation;
 		Ref<Material> m_Material;
 		Ref<Cutter> m_Cutter;

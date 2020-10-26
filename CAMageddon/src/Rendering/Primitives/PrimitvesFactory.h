@@ -48,8 +48,6 @@ namespace CAMageddon
 	public:
 		static VerticesBufferData<Vertex> CreateCubeVertices(float size = 2.0f);
 
-		static VerticesBufferData<VertexNT> CreateCubeVerticesNormalsTexture(float size = 2.0f);
-
 		static VerticesBufferData<Vertex> CreateFlatPatchVertices(float width = 2.0f, float height = 2.0f);
 
 		static VerticesIndicesBufferData<VertexNT> CreateFlatPlaneVerticesNormalsTexture(
@@ -58,14 +56,27 @@ namespace CAMageddon
 			int widthCount = 5,
 			int heightCount = 5);
 
-		static VerticesIndicesBufferData<VertexNT> CreateOpenCylinderVerticesNormalsTexture(
+		static VerticesIndicesBufferData<VertexN> CreateOpenCylinderVerticesNormals(
 			float radius = 1.0f,
 			float height = 5.0f,
-			int radiusCount = 10);
+			int radiusCount = 10,
+			float startHeight = 0.0f);
 
-		static VerticesIndicesBufferData<VertexNT> CreateSphereVerticesNormalsTexture(
+		static VerticesIndicesBufferData<VertexN> CreateFlatDiscNormals(
 			float radius = 1.0f,
 			int uDivisionCount = 10,
-			int vDivisionCount = 10);
+			float height = 0.0f);
+
+		static VerticesIndicesBufferData<VertexN> CreateSphereVerticesNormals(
+			float radius = 1.0f,
+			int uDivisionCount = 10,
+			int vDivisionCount = 10,
+			float height = 0.0f);
+
+		static VerticesIndicesBufferData<VertexN> CreateHalfSphereVerticesNormals(
+			float radius = 1.0f,
+			int uDivisionCount = 10,
+			int vDivisionCount = 10,
+			float height = 0.0f);
 	};
 }

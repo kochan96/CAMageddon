@@ -1,6 +1,8 @@
 #include "Simulation.h"
 #include "CAMApplication/Converter/MilimetersGLConverter.h"
 
+#include "Intersections.h"
+
 
 namespace CAMageddon
 {
@@ -82,7 +84,7 @@ namespace CAMageddon
 		m_CutterMovementEquation.CurrentPosition = m_Instructions[m_CurrentInstruction].GetPosition();
 		m_CutterMovementEquation.NextPosition = m_Instructions[m_CurrentInstruction + 1].GetPosition();
 		m_CutterMovementEquation.Distance = glm::distance(m_CutterMovementEquation.CurrentPosition, m_CutterMovementEquation.NextPosition);
-		m_CutterMovementEquation.VelocityValue = 250.0f;//250.0f; //250mm/s
+		m_CutterMovementEquation.VelocityValue = 250.0f; //250mm/s
 		m_CutterMovementEquation.Velocity = m_CutterMovementEquation.VelocityValue * glm::normalize(m_CutterMovementEquation.NextPosition - m_CutterMovementEquation.CurrentPosition);
 		m_CutterMovementEquation.TotalTime = m_CutterMovementEquation.Distance / m_CutterMovementEquation.VelocityValue;
 	}
@@ -102,14 +104,15 @@ namespace CAMageddon
 		glm::vec3 previousPosition = MilimetersGLConverter::GLToMilimeters(m_Cutter->GetPosition());
 		glm::vec3 nextPosition = previousPosition;
 
-		auto dt = m_DeltaTime * m_SimulationSpeed * 0.5f;
-		auto frameTime = ts;
+		auto dt = m_DeltaTime;
+		auto frameTime = ts * m_SimulationSpeed;
 		while (frameTime > 0.0f)
 		{
-			float deltaTime = std::min(frameTime.getSeconds(), dt);
+			float deltaTime = std::min(frameTime, dt);
 			nextPosition = GetNextCutterPosition(deltaTime);
 			CutMaterial(previousPosition, nextPosition);
-			frameTime = frameTime.getSeconds() - deltaTime;
+			frameTime = frameTime - deltaTime;
+			previousPosition = nextPosition;
 		}
 
 		m_Material->Update();
@@ -124,18 +127,28 @@ namespace CAMageddon
 		return (float)m_CurrentInstruction / (m_Instructions.size() - 1);
 	}
 
-	void CuttingSimulation::CutMaterial(glm::vec3 cutterPreviousPosition, glm::vec3 cutterNextPosition)
+	void CuttingSimulation::CutMaterial(glm::vec3 previousPosition, glm::vec3 cutterNextPosition)
 	{
-		int rowCount = m_Material->GetRowCount();
-		int columnCount = m_Material->GetColumnCount();
+		if (m_Cutter->GetType() == CutterType::FLAT)
+			CutFlat(previousPosition, cutterNextPosition);
+		else
+			CutSphere(previousPosition, cutterNextPosition);
+	}
 
-		auto cutterTestPosition = glm::vec2(cutterNextPosition.x, cutterNextPosition.y);
-		auto cutterHeight = cutterNextPosition.z;
+	void CuttingSimulation::CutFlat(glm::vec3 previousPosition, glm::vec3 cutterNextPosition)
+	{
 		auto cutterRadius = m_Cutter->GetRadius();
+		auto cutterHeight = cutterNextPosition.z;
+		auto cutterTestPosition = glm::vec2(cutterNextPosition.x, cutterNextPosition.y);
 
-		for (int row = 0; row < rowCount; row++)
+		glm::vec2 leftBottom = cutterTestPosition - glm::vec2(cutterRadius);
+		glm::vec2 topBottom = cutterTestPosition + glm::vec2(cutterRadius);
+
+		auto boundingIndices = m_Material->GetIndices(leftBottom, topBottom);
+
+		for (int row = boundingIndices.StartRow; row < boundingIndices.EndRow; row++)
 		{
-			for (int column = 0; column < columnCount; column++)
+			for (int column = boundingIndices.StartColumn; column < boundingIndices.EndColumn; column++)
 			{
 				auto position = m_Material->GetPosition(row, column);
 				auto position2 = position - cutterTestPosition;
@@ -148,13 +161,53 @@ namespace CAMageddon
 		}
 	}
 
+	void CuttingSimulation::CutSphere(glm::vec3 previousPosition, glm::vec3 cutterNextPosition)
+	{
+
+		auto cutterRadius = m_Cutter->GetRadius();
+		auto cutterHeight = cutterNextPosition.z;
+		auto cutterTestPosition = glm::vec2(cutterNextPosition.x, cutterNextPosition.y);
+
+		glm::vec2 leftBottom = cutterTestPosition - glm::vec2(cutterRadius);
+		glm::vec2 topBottom = cutterTestPosition + glm::vec2(cutterRadius);
+
+		Sphere sphere;
+		sphere.Center = glm::vec3(cutterNextPosition.x, cutterNextPosition.y, cutterNextPosition.z + cutterRadius);
+		sphere.Radius = cutterRadius;
+
+		auto boundingIndices = m_Material->GetIndices(leftBottom, topBottom);
+
+		for (int row = boundingIndices.StartRow; row < boundingIndices.EndRow; row++)
+		{
+			for (int column = boundingIndices.StartColumn; column < boundingIndices.EndColumn; column++)
+			{
+				auto position = m_Material->GetPosition(row, column);
+				auto position2 = position - cutterTestPosition;
+				if (glm::dot(position2, position2) <= (cutterRadius * cutterRadius))
+				{
+					auto materialHeight = m_Material->GetHeigth(row, column);
+					Line line;
+					line.Origin = glm::vec3(position.x, position.y, 0.0f);
+					line.Direction = glm::vec3(0.0f, 0.0f, 1.0f);
+
+					auto intersection = Intersections::Intersect(line, sphere);
+					if (intersection.Type == IntersectionType::NoIntersection)
+						continue;
+
+					m_Material->SetHeight(row, column, std::min(intersection.d1, materialHeight));
+				}
+			}
+		}
+	}
+
 	glm::vec3 CuttingSimulation::GetNextCutterPosition(float dt)
 	{
 		m_CutterMovementEquation.ActualTime += dt;
 
 		while (m_CutterMovementEquation.ActualTime >= m_CutterMovementEquation.TotalTime)
 		{
-			if (m_CurrentInstruction + 2 >= m_Instructions.size())
+			int tmp = m_CurrentInstruction + 2;
+			if (tmp >= static_cast<int>(m_Instructions.size()))
 			{
 				m_CurrentInstruction = m_Instructions.size() - 1;
 				m_State = SimulationState::FINSHED;
@@ -164,7 +217,9 @@ namespace CAMageddon
 			m_CurrentInstruction++;
 			m_CutterMovementEquation.ActualTime = m_CutterMovementEquation.ActualTime - m_CutterMovementEquation.TotalTime;
 			m_CutterMovementEquation.CurrentPosition = m_Instructions[m_CurrentInstruction].GetPosition();
-			m_CutterMovementEquation.NextPosition = m_Instructions[m_CurrentInstruction + 1].GetPosition();
+
+			int nextInstruction = m_CurrentInstruction + 1;
+			m_CutterMovementEquation.NextPosition = m_Instructions[nextInstruction].GetPosition();
 			m_CutterMovementEquation.Distance = glm::distance(m_CutterMovementEquation.CurrentPosition, m_CutterMovementEquation.NextPosition);
 			m_CutterMovementEquation.Velocity = m_CutterMovementEquation.VelocityValue * glm::normalize(m_CutterMovementEquation.NextPosition - m_CutterMovementEquation.CurrentPosition);
 			m_CutterMovementEquation.TotalTime = m_CutterMovementEquation.Distance / m_CutterMovementEquation.VelocityValue;
@@ -175,9 +230,19 @@ namespace CAMageddon
 
 	void CuttingSimulation::FastForward()
 	{
-		//TODO
+
+		glm::vec3 previousPosition = MilimetersGLConverter::GLToMilimeters(m_Cutter->GetPosition());
+		glm::vec3 nextPosition = previousPosition;
+
+		while (IsRunning())
+		{
+			nextPosition = GetNextCutterPosition(m_DeltaTime);
+			CutMaterial(previousPosition, nextPosition);
+			previousPosition = nextPosition;
+		}
+
+		m_Material->Update();
+		m_Cutter->SetPosition(MilimetersGLConverter::MilimetersToGL(nextPosition));
 	}
-
-
 }
 

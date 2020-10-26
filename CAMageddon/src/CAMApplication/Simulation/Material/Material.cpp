@@ -4,8 +4,6 @@
 #include "Rendering/Camera.h"
 #include <CAMApplication/Converter/MilimetersGLConverter.h>
 
-#include "../../Scene.h"
-
 namespace CAMageddon
 {
 	Material::Material()
@@ -27,6 +25,59 @@ namespace CAMageddon
 		Init();
 	}
 
+	static void AddPointLight(const Light& light, const Ref<OpenGLShader> shader, int& pointLightCount)
+	{
+		int i = pointLightCount;
+		shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].position", light.Position);
+
+		shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].ambient", light.Ambient);
+		shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].diffuse", light.Diffuse);
+		shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].specular", light.Specular);
+
+		shader->SetBool("u_PointLights[" + std::to_string(i) + "].attenuationEnabled", light.AttenuationEnabled);
+		shader->UploadUniformFloat("u_PointLights[" + std::to_string(i) + "].constant", light.Constant);
+		shader->UploadUniformFloat("u_PointLights[" + std::to_string(i) + "].linear", light.Linear);
+		shader->UploadUniformFloat("u_PointLights[" + std::to_string(i) + "].quadratic", light.Quadratic);
+
+		pointLightCount++;
+	}
+
+	static void AddDirLight(const Light& light, const Ref<OpenGLShader> shader, int& dirLightCount)
+	{
+		int i = dirLightCount;
+
+		shader->UploadUniformFloat3("u_DirLights[" + std::to_string(i) + "].direction", light.Direction);
+
+		shader->UploadUniformFloat3("u_DirLights[" + std::to_string(i) + "].ambient", light.Ambient);
+		shader->UploadUniformFloat3("u_DirLights[" + std::to_string(i) + "].diffuse", light.Diffuse);
+		shader->UploadUniformFloat3("u_DirLights[" + std::to_string(i) + "].specular", light.Specular);
+
+		dirLightCount++;
+	}
+
+	static void AddSpotLight(const Light& light, const Ref<OpenGLShader> shader, int& spotLightCount)
+	{
+		int i = spotLightCount;
+
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].position", light.Position);
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].direction", light.Direction);
+
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].ambient", light.Ambient);
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].diffuse", light.Diffuse);
+		shader->UploadUniformFloat3("u_SpotLights[" + std::to_string(i) + "].specular", light.Specular);
+
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].cutOff", light.CutOff);
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].outerCutOff", light.OuterCutOff);
+
+
+		shader->SetBool("u_SpotLights[" + std::to_string(i) + "].attenuationEnabled", light.AttenuationEnabled);
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].constant", light.Constant);
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].linear", light.Linear);
+		shader->UploadUniformFloat("u_SpotLights[" + std::to_string(i) + "].quadratic", light.Quadratic);
+
+		spotLightCount++;
+	}
+
 	void Material::Render(const FPSCamera& camera, std::vector<Light> lights)
 	{
 		auto shader = AssetsLibrary::Get().GetShader(AssetsConstants::MaterialShader);
@@ -37,15 +88,21 @@ namespace CAMageddon
 		shader->UploadUniformFloat3("u_ViewPosition", camera.GetPosition());
 
 		//LIGHTS
-		shader->UploadUniformInt("u_PointlightCount", lights.size());
+		int pointLightCount = 0, dirLightCount = 0, spotLightCount = 0;
+
 		for (int i = 0; i < lights.size(); i++)
 		{
-
-			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].position", lights[i].Position);
-			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].ambient", lights[i].Ambient);
-			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].diffuse", lights[i].Diffuse);
-			shader->UploadUniformFloat3("u_PointLights[" + std::to_string(i) + "].specular", lights[i].Specular);
+			if (lights[i].LightType == LightType::Point)
+				AddPointLight(lights[i], shader, pointLightCount);
+			else if (lights[i].LightType == LightType::Directional)
+				AddDirLight(lights[i], shader, dirLightCount);
+			else if (lights[i].LightType == LightType::Spot)
+				AddSpotLight(lights[i], shader, spotLightCount);
 		}
+
+		shader->UploadUniformInt("u_PointlightCount", pointLightCount);
+		shader->UploadUniformInt("u_DirlightCount", dirLightCount);
+		shader->UploadUniformInt("u_SpotlightCount", spotLightCount);
 
 		//MATERIAL
 		const int materialDiffuseTextureSlot = 0;
@@ -97,43 +154,34 @@ namespace CAMageddon
 		return { x,y };
 	}
 
-	std::vector<Index> Material::GetIndices(glm::vec2 leftBottom, glm::vec2 rightTop)
+	BoundingIndices Material::GetIndices(glm::vec2 leftBottom, glm::vec2 rightTop)
 	{
-		std::vector<Index> indices;
-
 		int maxRow = m_Specification.PrecisionY - 1;
 		int maxColumn = m_Specification.PrecisionX - 1;
 
 		float halfWidth = m_Specification.SizeX / 2.0f;
 		float halfHeight = m_Specification.SizeY / 2.0f;
 
-		int startRow = leftBottom.y / m_Specification.SizeY * maxRow + 0.5f;
-		int endRow = rightTop.y / m_Specification.SizeY * maxRow + 0.5f;
+		int startRow = (leftBottom.y / m_Specification.SizeY + 0.5f) * maxRow - 0.5f;
+		int endRow = (rightTop.y / m_Specification.SizeY + 0.5f) * maxRow + 0.5f;
 
 		if (endRow < 0 || startRow >= m_Specification.PrecisionY)
-			return indices;
+			return { 0,0,0,0 };
 
-		int startColumn = leftBottom.x / m_Specification.SizeX * maxColumn + 0.5f;
-		int endColumn = rightTop.x / m_Specification.SizeX * maxColumn + 0.5f;
+		int startColumn = (leftBottom.x / m_Specification.SizeX + 0.5f) * maxColumn - 0.5f;
+		int endColumn = (rightTop.x / m_Specification.SizeX + 0.5f) * maxColumn + 0.5f;
 
 		if (endColumn < 0 || startColumn >= m_Specification.PrecisionX)
-			return indices;
+			return { 0,0,0,0 };
 
-		startRow = std::min(startRow, 0);
-		endRow = std::min(endRow, maxRow);
 
-		startColumn = std::min(startColumn, 0);
-		endColumn = std::min(endColumn, maxColumn);
+		startColumn = std::max(startColumn, 0);
+		endColumn = std::min(endColumn, maxColumn + 1);
 
-		for (int row = startRow; row <= endRow; row++)
-		{
-			for (int column = startColumn; column <= endColumn; column++)
-			{
-				indices.push_back({ row,column });
-			}
-		}
+		startRow = std::max(startRow, 0);
+		endRow = std::min(endRow, maxRow + 1);
 
-		return indices;
+		return { startRow,endRow,startColumn,endColumn };
 	}
 
 	void Material::Update()
@@ -154,6 +202,20 @@ namespace CAMageddon
 		auto rowCount = m_HeightMap->GetTextureHeight();
 		auto columnCount = m_HeightMap->GetTextureWidth();
 		auto count = rowCount * columnCount;
+
+		for (int row = 0; row < rowCount; row++)
+		{
+			m_HeightMap->SetHeightValue(row, 0, 0);
+			m_HeightMap->SetHeightValue(row, columnCount - 1, 0);
+		}
+
+		for (int column = 0; column < columnCount; column++)
+		{
+			m_HeightMap->SetHeightValue(0, column, 0);
+			m_HeightMap->SetHeightValue(rowCount - 1, column, 0);
+		}
+
+		m_HeightMap->Update();
 
 		auto materialTop = PrimitiveFactory::CreateFlatPlaneVerticesNormalsTexture(
 			MilimetersGLConverter::MilimetersToGL(m_Specification.SizeX),

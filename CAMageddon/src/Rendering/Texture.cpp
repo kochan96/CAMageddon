@@ -29,6 +29,7 @@ namespace CAMageddon
 		int width, height, channels;
 		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
 		LOG_ASSERT(data, stbi_failure_reason());
+		LOG_INFO("Path: {}", path);
 
 		m_Width = width;
 		m_Height = height;

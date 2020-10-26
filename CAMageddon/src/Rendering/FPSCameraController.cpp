@@ -88,15 +88,18 @@ namespace CAMageddon
 	{
 		auto [mousePosX, mousePosY] = Input::GetMousePosition();
 
+		auto maxX = glm::radians(89.0f);
+		auto minX = glm::radians(-89.0f);
+
 		if (Input::IsMouseButtonPressed(CAM_MOUSE_BUTTON_RIGHT))
 		{
 			m_CameraRotation.x -= (mousePosY - lastMousePos.y) * m_CameraRotationSpeed;
 			m_CameraRotation.y -= (mousePosX - lastMousePos.x) * m_CameraRotationSpeed;
 
-			if (m_CameraRotation.x > 89.0f)
-				m_CameraRotation.x = 89.0f;
-			if (m_CameraRotation.x < -89.0f)
-				m_CameraRotation.x = -89.0f;
+			if (m_CameraRotation.x > maxX)
+				m_CameraRotation.x = maxX;
+			if (m_CameraRotation.x < minX)
+				m_CameraRotation.x = minX;
 
 			m_Camera.SetRotation(m_CameraRotation);
 		}
