@@ -108,8 +108,11 @@ namespace CAMageddon
 		const int materialDiffuseTextureSlot = 0;
 		const int materialSpecularTextureSlot = 1;
 
-		AssetsLibrary::Get().GetTexture(AssetsConstants::MaterialDiffuseTexture)->Bind(materialDiffuseTextureSlot);
-		AssetsLibrary::Get().GetTexture(AssetsConstants::MaterialSpecularTexture)->Bind(materialSpecularTextureSlot);
+		auto diffuseTexture = !m_IsWood ? AssetsConstants::BoxDiffuseTexture : AssetsConstants::WoodDiffuseTexture;
+		auto specularTexture = !m_IsWood ? AssetsConstants::BoxDiffuseTexture : AssetsConstants::WoodSpecularTexture;
+
+		AssetsLibrary::Get().GetTexture(diffuseTexture)->Bind(materialDiffuseTextureSlot);
+		AssetsLibrary::Get().GetTexture(specularTexture)->Bind(materialSpecularTextureSlot);
 		shader->SetInt("u_Material.diffuse", materialDiffuseTextureSlot);
 		shader->SetInt("u_Material.specular", materialSpecularTextureSlot);
 		shader->UploadUniformFloat("u_Material.shininess", 32.0f);

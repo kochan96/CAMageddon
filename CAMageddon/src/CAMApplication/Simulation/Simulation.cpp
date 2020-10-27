@@ -86,7 +86,7 @@ namespace CAMageddon
 		int nextInstruction = m_CurrentInstruction + 1;
 		m_CutterMovementEquation.NextPosition = m_Instructions[nextInstruction].GetPosition();
 		m_CutterMovementEquation.Distance = glm::distance(m_CutterMovementEquation.CurrentPosition, m_CutterMovementEquation.NextPosition);
-		m_CutterMovementEquation.VelocityValue = 250.0f; //250mm/s
+		m_CutterMovementEquation.VelocityValue = 25.0f; //250mm/s
 		m_CutterMovementEquation.Velocity = m_CutterMovementEquation.VelocityValue * glm::normalize(m_CutterMovementEquation.NextPosition - m_CutterMovementEquation.CurrentPosition);
 		m_CutterMovementEquation.TotalTime = m_CutterMovementEquation.Distance / m_CutterMovementEquation.VelocityValue;
 	}

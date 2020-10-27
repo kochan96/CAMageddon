@@ -23,15 +23,17 @@ namespace CAMageddon
         const std::string CutterShader = "CutterShader";
         const std::string CutterShaderPath = "assets/shaders/CutterShader.glsl";
 
-        //const std::string MaterialDiffuseTexture = "wood_diffuse";
-        //const std::string MaterialDiffuseTexturePath = "assets/textures/wood/wood_diffuse.jpg";
-        const std::string MaterialDiffuseTexture = "wood_diffuse";
-        const std::string MaterialDiffuseTexturePath = "assets/textures/other/box4_diff.jpg";
+        const std::string WoodDiffuseTexture = "wood_diffuse";
+        const std::string WoodDiffuseTexturePath = "assets/textures/wood/wood_diffuse.jpg";
+        
+        const std::string BoxDiffuseTexture = "box_diffuse";
+        const std::string BoxDiffuseTexturePath = "assets/textures/other/box4_diff.jpg";
 
-        //const std::string MaterialSpecularTexture = "wood_specular";
-        //const std::string MaterialSpecularTexturePath = "assets/textures/wood/wood_specular.jpg";
-        const std::string MaterialSpecularTexture = "wood_specular";
-        const std::string MaterialSpecularTexturePath = "assets/textures/other/box4_spec.jpg";
+        const std::string WoodSpecularTexture = "wood_specular";
+        const std::string WoodSpecularTexturePath = "assets/textures/wood/wood_specular.jpg";
+        
+        const std::string BoxSpecularTexture = "box_specular";
+        const std::string BoxSpecularTexturePath = "assets/textures/other/box4_spec.jpg";
     }
 
     class AssetsLibrary

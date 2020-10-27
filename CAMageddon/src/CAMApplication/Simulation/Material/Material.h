@@ -47,6 +47,9 @@ namespace CAMageddon
 		float GetMaxDepth() { return m_Specification.MaxDepth; }
 		float GetMaxHeight() { return m_Specification.SizeZ; }
 
+		bool GetIsWood() const { return m_IsWood; }
+		void SetIsWood(bool isWood) { m_IsWood = isWood; }
+
 		float GetHeigth(int row, int column);
 		void SetHeight(int row, int column, float value);
 		glm::vec2 GetPosition(int row, int column);
@@ -59,6 +62,8 @@ namespace CAMageddon
 		void Init();
 
 	private:
+		bool m_IsWood = false;
+
 		Scope<OpenGLVertexArray> m_VertexArray;
 
 		Scope<HeightMap> m_HeightMap;

@@ -202,9 +202,9 @@ namespace CAMageddon
 				}
 
 				float speed = m_Scene->GetSimulationSpeed();
-				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 2.0f))
+				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 10.0f))
 				{
-					speed = std::clamp(speed, 0.1f, 2.0f);
+					speed = std::clamp(speed, 0.1f, 10.0f);
 					m_Scene->SetSimulationSpeed(speed);
 				}
 
@@ -223,9 +223,9 @@ namespace CAMageddon
 				}
 
 				float speed = m_Scene->GetSimulationSpeed();
-				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 2.0f))
+				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 10.0f))
 				{
-					speed = std::clamp(speed, 0.1f, 2.0f);
+					speed = std::clamp(speed, 0.1f, 10.0f);
 					m_Scene->SetSimulationSpeed(speed);
 				}
 			}
@@ -237,9 +237,9 @@ namespace CAMageddon
 				}
 
 				float speed = m_Scene->GetSimulationSpeed();
-				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 2.0f))
+				if (ImGui::SliderFloat("Speed", &speed, 0.1f, 10.0f))
 				{
-					speed = std::clamp(speed, 0.1f, 2.0f);
+					speed = std::clamp(speed, 0.1f, 10.0f);
 					m_Scene->SetSimulationSpeed(speed);
 				}
 			}
@@ -278,6 +278,12 @@ namespace CAMageddon
 			auto material = m_Scene->GetMaterial();
 			if (material)
 			{
+				bool isWood = material->GetIsWood();
+				if(ImGui::Checkbox("Wood", &isWood))
+				{
+					material->SetIsWood(isWood);
+				}
+
 				auto& materialSpec = material->GetSpecification();
 
 				if (ImGui::DragFloat("MaxDepth", &materialSpec.MaxDepth, 1.0f, 0.0f, materialSpec.SizeZ))

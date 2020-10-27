@@ -98,8 +98,10 @@ namespace CAMageddon
 
 	void Scene::LoadTextures()
 	{
-		AssetsLibrary::Get().LoadTexture(AssetsConstants::MaterialDiffuseTexture, AssetsConstants::MaterialDiffuseTexturePath);
-		AssetsLibrary::Get().LoadTexture(AssetsConstants::MaterialSpecularTexture, AssetsConstants::MaterialSpecularTexturePath);
+		AssetsLibrary::Get().LoadTexture(AssetsConstants::BoxDiffuseTexture, AssetsConstants::BoxDiffuseTexturePath);
+		AssetsLibrary::Get().LoadTexture(AssetsConstants::BoxSpecularTexture, AssetsConstants::BoxSpecularTexturePath);
+		AssetsLibrary::Get().LoadTexture(AssetsConstants::WoodDiffuseTexture, AssetsConstants::WoodDiffuseTexturePath);
+		AssetsLibrary::Get().LoadTexture(AssetsConstants::WoodSpecularTexture, AssetsConstants::WoodSpecularTexturePath);
 	}
 
 	void Scene::InitSimulation()

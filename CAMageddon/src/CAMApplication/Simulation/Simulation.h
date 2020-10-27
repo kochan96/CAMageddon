@@ -77,7 +77,7 @@ namespace CAMageddon
 		SimulationState m_State = SimulationState::MATERIAL_NOT_ASSIGNED;
 
 		float m_Time = 0.0f;
-		float m_DeltaTime = 0.003f;
+		float m_DeltaTime = 0.03f;
 		float m_SimulationSpeed = 1.0f;
 	};
 }
