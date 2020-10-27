@@ -28,6 +28,14 @@ vec3 CalculateNormalFromHeightMap()
     float heightRight = textureOffset(u_HeightMap, a_TexCoord, ivec2(1, 0)).r;
     float heightLeft = textureOffset(u_HeightMap, a_TexCoord, ivec2(-1, 0)).r;
 
+
+    
+    heightTop *=10.0f;
+    heightBottom *=10.0f;
+    heightRight *=10.0f;
+    heightLeft *=10.0f;
+
+
     vec3 vx = vec3(2.0f,0.0f,(heightRight-heightLeft));
     vec3 vy = vec3(0.0f,2.0f,(heightTop-heightBottom));
 

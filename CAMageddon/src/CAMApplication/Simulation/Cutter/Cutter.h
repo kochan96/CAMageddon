@@ -23,9 +23,12 @@ namespace CAMageddon
 		float GetDiameter() const { return m_Diameter; }
 		float GetRadius() const { return m_Diameter / 2.0f; }
 
+		void SetDiameter(float diameter) { m_Diameter = diameter; Init(); }
+
 		void Render(const FPSCamera& camera, std::vector<Light> lights);
 
 		CutterType GetType() const { return m_Type; }
+		void SetType(const CutterType& type) { m_Type = type; Init(); }
 
 	private:
 		void Init();

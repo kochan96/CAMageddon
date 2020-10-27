@@ -22,8 +22,21 @@ namespace CAMageddon
 		light.Ambient = glm::vec3(0.5f, 0.5f, 0.5f);
 		light.Diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
 		light.Specular = glm::vec3(1.0f, 1.0f, 1.0f);
+		light.Name = "Main Light";
 
 		m_Lights.push_back(light);
+
+
+		glm::vec3 lightPosition2 = { 0.0f, -150.0f, 200.0f };
+		glm::vec3 lightDirection2 = glm::normalize(glm::vec3(0) - lightPosition2);
+		Light light2(lightPosition2, lightDirection2);
+		light2.LightType = LightType::Directional;
+		light2.Ambient = glm::vec3(0.5f, 0.5f, 0.5f);
+		light2.Diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
+		light2.Specular = glm::vec3(1.0f, 1.0f, 1.0f);
+		light2.Name = "Second Light";
+
+		m_Lights.push_back(light2);
 	}
 
 	void Scene::Init()

@@ -172,10 +172,18 @@ namespace CAMageddon
 			auto filePath = FileDialog::OpenFile("SelectPath", "assets/paths/", 2, filters);
 			if (filePath)
 			{
-				auto cutter = CuttingLoader::LoadCutter(filePath);
-				auto instructions = CuttingLoader::LoadInstructions(filePath);
-				m_Scene->SetCutter(std::move(cutter));
-				m_Scene->SetCutterInstructions(instructions);
+
+				try
+				{
+					auto cutter = CuttingLoader::LoadCutter(filePath);
+					auto instructions = CuttingLoader::LoadInstructions(filePath);
+					m_Scene->SetCutter(std::move(cutter));
+					m_Scene->SetCutterInstructions(instructions);
+				}
+				catch (...)
+				{
+					LOG_ERROR("Error loading file");
+				}
 			}
 		}
 
@@ -282,9 +290,9 @@ namespace CAMageddon
 					materialSpec.SizeX = std::clamp(materialSpec.SizeX, 10.0f, 500.0f);
 				}
 
-				if (ImGui::DragInt("Width Precision", &materialSpec.PrecisionX, 1.0f, 300, 1000))
+				if (ImGui::DragInt("Width Precision", &materialSpec.PrecisionX, 1.0f, 300, 2500))
 				{
-					materialSpec.PrecisionX = std::clamp(materialSpec.PrecisionX, 300, 1000);
+					materialSpec.PrecisionX = std::clamp(materialSpec.PrecisionX, 300, 2500);
 				}
 
 				if (ImGui::DragFloat("Length", &materialSpec.SizeY, 1.0f, 10.0f, 500.0f))
@@ -292,9 +300,9 @@ namespace CAMageddon
 					materialSpec.SizeY = std::clamp(materialSpec.SizeY, 10.0f, 500.0f);
 				}
 
-				if (ImGui::DragInt("Length Precision", &materialSpec.PrecisionY, 1.0f, 300, 1000))
+				if (ImGui::DragInt("Length Precision", &materialSpec.PrecisionY, 1.0f, 300, 2500))
 				{
-					materialSpec.PrecisionY = std::clamp(materialSpec.PrecisionY, 300, 1000);
+					materialSpec.PrecisionY = std::clamp(materialSpec.PrecisionY, 300, 2500);
 				}
 
 				if (ImGui::DragFloat("Height", &materialSpec.SizeZ, 1.0f, 10.0f, 500.0f))
@@ -321,6 +329,24 @@ namespace CAMageddon
 			auto cutter = m_Scene->GetCutter();
 			if (cutter)
 			{
+				bool runningOrPaused = m_Scene->IsSimulationRunning() || m_Scene->IsSimulationPaused();
+				if (!runningOrPaused)
+				{
+					bool isFlat = cutter->GetType() == CutterType::FLAT;
+					if (ImGui::Checkbox("Flat", &isFlat))
+					{
+						auto newType = isFlat ? CutterType::FLAT : CutterType::SPHERICAL;
+						cutter->SetType(newType);
+					}
+
+					auto diameter = cutter->GetDiameter();
+					if (ImGui::DragFloat("Diameter", &diameter, 1.0f, 1.0f, 30.0f))
+					{
+						diameter = std::clamp(diameter,1.0f,30.0f);
+						cutter->SetDiameter(diameter);
+					}
+				}
+
 				ImGui::Text("Cutter Type %s", cutter->GetType() == CutterType::FLAT ? "Flat" : "Spherical");
 				ImGui::Text("Cutter diameter %f", cutter->GetDiameter());
 			}
