@@ -7,3 +7,6 @@
 [submodule "CAMageddon/vendor/glfw"]
 	path = CAMageddon/vendor/glfw
 	url = https://github.com/kochan96/glfw.git
+[submodule "CAMageddon/vendor/tinyxml2"]
+	path = CAMageddon/vendor/tinyxml2
+	url = https://github.com/kochan96/tinyxml2.git
