@@ -17,12 +17,14 @@ IncludeDir["ImGui"] = "CAMageddon/vendor/imgui"
 IncludeDir["glm"] = "CAMageddon/vendor/glm"
 IncludeDir["spdlog"] = "CAMageddon/vendor/spdlog"
 IncludeDir["tinygiledialogs"] = "CAMageddon/vendor/tinyfiledialogs"
+IncludeDir["tinyxml2"] = "CAMageddon/vendor/tinyxml2"
 IncludeDir["stb_image"] = "CAMageddon/vendor/stb_image"
 
 group "Dependencies"
     include "CAMageddon/vendor/glfw"
     include "CAMageddon/vendor/glad"
     include "CAMageddon/vendor/imgui"
+    include "CAMageddon/vendor/tinyxml2"
 group ""
 
 project "CAMageddon"
@@ -62,6 +64,7 @@ project "CAMageddon"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
+        "%{IncludeDir.tinyxml2}",
         "%{IncludeDir.tinygiledialogs}",
         "%{IncludeDir.stb_image}"
     }
@@ -71,6 +74,7 @@ project "CAMageddon"
 		"GLFW",
         "Glad",
         "ImGui",
+        "tinyxml2",
 		"opengl32.lib"
     }
 

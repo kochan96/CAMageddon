@@ -6,6 +6,8 @@
 #include "Helpers/FileDialog.h"
 #include "Simulation/CuttingLoader.h"
 
+#include "PathGeneration/CAD/ModelLoader.h"
+#include "PathGeneration/PathGenerator.h"
 
 namespace CAMageddon
 {
@@ -72,6 +74,7 @@ namespace CAMageddon
 		RenderDebugWindow();
 		RenderSimulationControl();
 		RenderViewport();
+		RenderGeneratePaths();
 	}
 
 	static void RenderPointLightEdit(Light& light)
@@ -279,7 +282,7 @@ namespace CAMageddon
 			if (material)
 			{
 				bool isWood = material->GetIsWood();
-				if(ImGui::Checkbox("Wood", &isWood))
+				if (ImGui::Checkbox("Wood", &isWood))
 				{
 					material->SetIsWood(isWood);
 				}
@@ -348,7 +351,7 @@ namespace CAMageddon
 					auto diameter = cutter->GetDiameter();
 					if (ImGui::DragFloat("Diameter", &diameter, 1.0f, 1.0f, 30.0f))
 					{
-						diameter = std::clamp(diameter,1.0f,30.0f);
+						diameter = std::clamp(diameter, 1.0f, 30.0f);
 						cutter->SetDiameter(diameter);
 					}
 				}
@@ -387,6 +390,51 @@ namespace CAMageddon
 		ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 		ImGui::End();
 		ImGui::PopStyleVar();
+	}
+
+	void AppLayer::RenderGeneratePaths()
+	{
+		if (ImGui::Begin("Path Generation"))
+		{
+			if (ImGui::Button("Load Model"))
+			{
+				const char* filters[] = { "*.xml" };
+
+				auto filePath = FileDialog::OpenFile("Select Model", "assets/models/", 1, filters);
+				if (filePath)
+				{
+					try
+					{
+						m_Surfaces = ModelLoader::LoadModel(filePath);
+					}
+					catch (...)
+					{
+						LOG_ERROR("Error loading file");
+					}
+				}
+			}
+		}
+
+		if (m_Surfaces.empty())
+		{
+			ImGui::End();
+			return;
+		}
+
+		std::string folder = "assets/paths/fish/";
+		if (ImGui::Button("Generate First Path"))
+		{
+			PathGenerator pathGenerator(
+				folder,
+				m_Scene->GetMaterial()->GetSpecification(),
+				m_Scene->GetMaterial(),
+				m_Surfaces);
+
+			pathGenerator.GenerateFirstPath("1.k16");
+		}
+
+
+		ImGui::End();
 	}
 
 	void AppLayer::OnEvent(Event& event)

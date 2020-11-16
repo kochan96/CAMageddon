@@ -8,7 +8,7 @@ namespace CAMageddon
 {
 	Material::Material()
 	{
-		m_Specification.MaxDepth = 40.0f;
+		m_Specification.MaxDepth = 35.0f;
 		m_Specification.SizeZ = 50.0f;
 
 		m_Specification.SizeX = 150.0f;

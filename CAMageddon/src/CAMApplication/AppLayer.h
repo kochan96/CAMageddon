@@ -4,6 +4,8 @@
 #include "Rendering/FrameBuffer.h"
 #include "Scene.h"
 
+#include "CAMApplication/PathGeneration/CAD/SurfaceUV.h"
+
 namespace CAMageddon
 {
 	class AppLayer : public Layer
@@ -25,11 +27,15 @@ namespace CAMageddon
 		void RenderCutterInfo();
 		void RenderViewport();
 
+		void RenderGeneratePaths();
+
 	private:
 		Scope<FPSCameraController> m_CameraController;
 		Scope<Scene> m_Scene;
 		Ref<OpenGLFramebuffer> m_MsoFramebuffer;
 		Ref<OpenGLFramebuffer> m_ViewportFramebuffer;
+
+		std::vector<std::shared_ptr<SurfaceUV>> m_Surfaces;
 		
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 	};

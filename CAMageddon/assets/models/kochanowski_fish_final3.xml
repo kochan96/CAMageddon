@@ -1,0 +1,1078 @@
+<Scene xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://mini.pw.edu.pl/mg1">
+    <Point Name="KorpusPoint_0">
+        <Position X="-48.793591" Y="-9.253746" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_1">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_2">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_3">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_4">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_5">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_6">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_7">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999851"/>
+    </Point>
+    <Point Name="KorpusPoint_8">
+        <Position X="-48.993572" Y="-9.2537498" Z="14.999851"/>
+    </Point>
+    <Point Name="KorpusPoint_9">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_10">
+        <Position X="-48.993572" Y="-9.253746" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_11">
+        <Position X="-48.993572" Y="-9.2537498" Z="14.999851"/>
+    </Point>
+    <Point Name="KorpusPoint_12">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_13">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_14">
+        <Position X="-48.993572" Y="-9.2537498" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_15">
+        <Position X="-48.993572" Y="-9.2537498" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_16">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_17">
+        <Position X="-48.993572" Y="-9.2537422" Z="14.999849"/>
+    </Point>
+    <Point Name="KorpusPoint_18">
+        <Position X="29.821058" Y="76.168015" Z="14.999836"/>
+    </Point>
+    <Point Name="KorpusPoint_19">
+        <Position X="29.821379" Y="55.404976" Z="-20.979816"/>
+    </Point>
+    <Point Name="KorpusPoint_20">
+        <Position X="29.821341" Y="-35.93235" Z="-20.979794"/>
+    </Point>
+    <Point Name="KorpusPoint_21">
+        <Position X="29.821356" Y="-56.693569" Z="14.999859"/>
+    </Point>
+    <Point Name="KorpusPoint_22">
+        <Position X="29.821539" Y="-35.932266" Z="50.979523"/>
+    </Point>
+    <Point Name="KorpusPoint_23">
+        <Position X="29.821478" Y="55.405045" Z="50.979477"/>
+    </Point>
+    <Point Name="KorpusPoint_24">
+        <Position X="70.80941" Y="1.4318466" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_25">
+        <Position X="70.80941" Y="1.4318466" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_26">
+        <Position X="70.80941" Y="1.4318466" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_27">
+        <Position X="70.80941" Y="1.4318466" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_28">
+        <Position X="70.80941" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_29">
+        <Position X="70.80941" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_30">
+        <Position X="70.809395" Y="1.4318466" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_31">
+        <Position X="70.809395" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_32">
+        <Position X="70.809395" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_33">
+        <Position X="70.809395" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_34">
+        <Position X="70.809395" Y="1.4318466" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_35">
+        <Position X="70.809395" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_36">
+        <Position X="70.809395" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_37">
+        <Position X="70.809395" Y="1.4318466" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_38">
+        <Position X="70.809395" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_39">
+        <Position X="70.809395" Y="1.4318466" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_40">
+        <Position X="70.809395" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="KorpusPoint_41">
+        <Position X="70.809395" Y="1.4318485" Z="14.999855"/>
+    </Point>
+    <Point Name="LoopPoint_0">
+        <Position X="29.020437" Y="27.87928" Z="14.999977"/>
+    </Point>
+    <Point Name="LoopPoint_1">
+        <Position X="32.548306" Y="25.674805" Z="0.16222191"/>
+    </Point>
+    <Point Name="LoopPoint_2">
+        <Position X="36.076229" Y="23.47031" Z="14.999981"/>
+    </Point>
+    <Point Name="LoopPoint_3">
+        <Position X="32.54829" Y="25.67482" Z="29.837738"/>
+    </Point>
+    <Point Name="LoopPoint_4">
+        <Position X="34.931133" Y="37.338387" Z="14.999981"/>
+    </Point>
+    <Point Name="LoopPoint_5">
+        <Position X="38.459019" Y="35.133919" Z="0.16222191"/>
+    </Point>
+    <Point Name="LoopPoint_6">
+        <Position X="41.986935" Y="32.929432" Z="14.999981"/>
+    </Point>
+    <Point Name="LoopPoint_7">
+        <Position X="38.459011" Y="35.133911" Z="29.837742"/>
+    </Point>
+    <Point Name="LoopPoint_8">
+        <Position X="41.972065" Y="45.466141" Z="14.999989"/>
+    </Point>
+    <Point Name="LoopPoint_9">
+        <Position X="45.49995" Y="43.261681" Z="0.16222"/>
+    </Point>
+    <Point Name="LoopPoint_10">
+        <Position X="49.027843" Y="41.057198" Z="14.999989"/>
+    </Point>
+    <Point Name="LoopPoint_11">
+        <Position X="45.499966" Y="43.261673" Z="29.837742"/>
+    </Point>
+    <Point Name="LoopPoint_12">
+        <Position X="54.598759" Y="54.298767" Z="15.000164"/>
+    </Point>
+    <Point Name="LoopPoint_13">
+        <Position X="53.958714" Y="47.723518" Z="0.16238976"/>
+    </Point>
+    <Point Name="LoopPoint_14">
+        <Position X="53.318699" Y="41.148293" Z="15.000164"/>
+    </Point>
+    <Point Name="LoopPoint_15">
+        <Position X="59.725525" Y="44.120064" Z="29.837917"/>
+    </Point>
+    <Point Name="LoopPoint_16">
+        <Position X="77.764488" Y="32.344967" Z="15.000158"/>
+    </Point>
+    <Point Name="LoopPoint_17">
+        <Position X="69.552696" Y="30.748756" Z="6.0974922"/>
+    </Point>
+    <Point Name="LoopPoint_18">
+        <Position X="61.340897" Y="29.15255" Z="15.000154"/>
+    </Point>
+    <Point Name="LoopPoint_19">
+        <Position X="69.552696" Y="30.748756" Z="23.902813"/>
+    </Point>
+    <Point Name="LoopPoint_20">
+        <Position X="56.249714" Y="6.6151199" Z="15.268517"/>
+    </Point>
+    <Point Name="LoopPoint_21">
+        <Position X="51.217091" Y="10.017881" Z="6.1002827"/>
+    </Point>
+    <Point Name="LoopPoint_22">
+        <Position X="46.095493" Y="13.63238" Z="14.731438"/>
+    </Point>
+    <Point Name="LoopPoint_23">
+        <Position X="51.128063" Y="10.229616" Z="23.899666"/>
+    </Point>
+    <Point Name="LoopPoint_24">
+        <Position X="50.092449" Y="-2.3538423" Z="14.999977"/>
+    </Point>
+    <Point Name="LoopPoint_25">
+        <Position X="47.975719" Y="-1.0311618" Z="6.0973167"/>
+    </Point>
+    <Point Name="LoopPoint_26">
+        <Position X="45.858982" Y="0.29151726" Z="14.999978"/>
+    </Point>
+    <Point Name="LoopPoint_27">
+        <Position X="47.975719" Y="-1.0311542" Z="23.902634"/>
+    </Point>
+    <Point Name="TailPoint_0">
+        <Position X="-85.684853" Y="-57.244038" Z="14.99956"/>
+    </Point>
+    <Point Name="TailPoint_1">
+        <Position X="-62.592609" Y="-19.48605" Z="14.998808"/>
+    </Point>
+    <Point Name="TailPoint_2">
+        <Position X="-62.592602" Y="6.5539575" Z="15.000189"/>
+    </Point>
+    <Point Name="TailPoint_3">
+        <Position X="-88.965919" Y="36.499954" Z="14.999427"/>
+    </Point>
+    <Point Name="TailPoint_4">
+        <Position X="-62.592602" Y="6.5539575" Z="15.000176"/>
+    </Point>
+    <Point Name="TailPoint_5">
+        <Position X="-62.592609" Y="-19.486057" Z="14.998808"/>
+    </Point>
+    <Point Name="TailPoint_6">
+        <Position X="-74.310608" Y="-57.244038" Z="14.99956"/>
+    </Point>
+    <Point Name="TailPoint_7">
+        <Position X="-62.592609" Y="-19.48605" Z="15.000144"/>
+    </Point>
+    <Point Name="TailPoint_8">
+        <Position X="-62.592602" Y="6.5539594" Z="15.000189"/>
+    </Point>
+    <Point Name="TailPoint_9">
+        <Position X="-77.591652" Y="36.499954" Z="14.999427"/>
+    </Point>
+    <Point Name="TailPoint_10">
+        <Position X="-62.592602" Y="6.5539575" Z="15.000189"/>
+    </Point>
+    <Point Name="TailPoint_11">
+        <Position X="-62.592609" Y="-19.48605" Z="15.000144"/>
+    </Point>
+    <Point Name="TailPoint_12">
+        <Position X="-62.936352" Y="-57.244038" Z="14.99956"/>
+    </Point>
+    <Point Name="TailPoint_13">
+        <Position X="-62.592609" Y="-19.486057" Z="15.000144"/>
+    </Point>
+    <Point Name="TailPoint_14">
+        <Position X="-62.592609" Y="6.5539556" Z="15.000176"/>
+    </Point>
+    <Point Name="TailPoint_15">
+        <Position X="-66.217384" Y="36.499962" Z="14.999427"/>
+    </Point>
+    <Point Name="TailPoint_16">
+        <Position X="-62.592609" Y="6.5539575" Z="15.000176"/>
+    </Point>
+    <Point Name="TailPoint_17">
+        <Position X="-62.592609" Y="-19.48605" Z="15.000144"/>
+    </Point>
+    <Point Name="TailPoint_18">
+        <Position X="-54.624378" Y="-32.506027" Z="15.000121"/>
+    </Point>
+    <Point Name="TailPoint_19">
+        <Position X="-54.624378" Y="-19.486046" Z="105.80062"/>
+    </Point>
+    <Point Name="TailPoint_20">
+        <Position X="-52.671375" Y="-16.231045" Z="105.79929"/>
+    </Point>
+    <Point Name="TailPoint_21">
+        <Position X="-54.624386" Y="19.573959" Z="15.000199"/>
+    </Point>
+    <Point Name="TailPoint_22">
+        <Position X="-52.671375" Y="-16.231041" Z="-75.801582"/>
+    </Point>
+    <Point Name="TailPoint_23">
+        <Position X="-54.624386" Y="-19.48605" Z="-75.800232"/>
+    </Point>
+    <Point Name="TailPoint_24">
+        <Position X="-46.499889" Y="-32.506027" Z="15.000121"/>
+    </Point>
+    <Point Name="TailPoint_25">
+        <Position X="-46.499897" Y="-19.486042" Z="105.80065"/>
+    </Point>
+    <Point Name="TailPoint_26">
+        <Position X="-46.499897" Y="6.5539536" Z="105.80069"/>
+    </Point>
+    <Point Name="TailPoint_27">
+        <Position X="-46.499897" Y="19.573959" Z="15.000202"/>
+    </Point>
+    <Point Name="TailPoint_28">
+        <Position X="-46.499897" Y="6.5539575" Z="-75.800201"/>
+    </Point>
+    <Point Name="TailPoint_29">
+        <Position X="-46.499897" Y="-19.48605" Z="-75.80027"/>
+    </Point>
+    <Point Name="TailPoint_30">
+        <Position X="-38.375416" Y="-32.506027" Z="15.000121"/>
+    </Point>
+    <Point Name="TailPoint_31">
+        <Position X="-38.375416" Y="-19.486042" Z="105.80062"/>
+    </Point>
+    <Point Name="TailPoint_32">
+        <Position X="-38.375408" Y="6.5539556" Z="105.80069"/>
+    </Point>
+    <Point Name="TailPoint_33">
+        <Position X="-38.375408" Y="19.573956" Z="15.000199"/>
+    </Point>
+    <Point Name="TailPoint_34">
+        <Position X="-38.375408" Y="6.5539575" Z="-75.800232"/>
+    </Point>
+    <Point Name="TailPoint_35">
+        <Position X="-38.375408" Y="-19.486046" Z="-75.80027"/>
+    </Point>
+    <Point Name="TailPoint_36">
+        <Position X="-22.126453" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_37">
+        <Position X="-22.126461" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_38">
+        <Position X="-22.126453" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_39">
+        <Position X="-22.126453" Y="-6.4660339" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_40">
+        <Position X="-22.126453" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_41">
+        <Position X="-22.126461" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_42">
+        <Position X="-22.126461" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_43">
+        <Position X="-22.126461" Y="-6.4660339" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_44">
+        <Position X="-22.126461" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_45">
+        <Position X="-22.126461" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_46">
+        <Position X="-22.126461" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_47">
+        <Position X="-22.126461" Y="-6.4660378" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_48">
+        <Position X="-22.126461" Y="-6.4660397" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_49">
+        <Position X="-22.126461" Y="-6.4660358" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_50">
+        <Position X="-22.126461" Y="-6.4660397" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_51">
+        <Position X="-22.126461" Y="-6.4660397" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_52">
+        <Position X="-22.126461" Y="-6.4660358" Z="15.00016"/>
+    </Point>
+    <Point Name="TailPoint_53">
+        <Position X="-22.126453" Y="-6.4660397" Z="15.00016"/>
+    </Point>
+    <Point Name="TopFinPoint_0">
+        <Position X="25.543854" Y="38.856827" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_1">
+        <Position X="11.552944" Y="30.160671" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_2">
+        <Position X="3.8668513" Y="22.132088" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_3">
+        <Position X="-1.9009254" Y="21.797096" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_4">
+        <Position X="-4.994483" Y="19.873943" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_5">
+        <Position X="-9.2992153" Y="17.198042" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_6">
+        <Position X="-17.235092" Y="12.265028" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_7">
+        <Position X="-21.545689" Y="9.5853939" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_8">
+        <Position X="-25.244701" Y="7.2858171" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_9">
+        <Position X="-28.338596" Y="5.36551" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_10">
+        <Position X="25.543236" Y="38.859802" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_11">
+        <Position X="11.018829" Y="39.61908" Z="28.910433"/>
+    </Point>
+    <Point Name="TopFinPoint_12">
+        <Position X="4.2920413" Y="35.437958" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_13">
+        <Position X="-2.4349256" Y="31.256184" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_14">
+        <Position X="-5.3778825" Y="26.459854" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_15">
+        <Position X="-10.436539" Y="26.281956" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_16">
+        <Position X="-17.769348" Y="21.723606" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_17">
+        <Position X="-22.079861" Y="19.044102" Z="32.53923"/>
+    </Point>
+    <Point Name="TopFinPoint_18">
+        <Position X="-25.779018" Y="16.744818" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_19">
+        <Position X="-28.33868" Y="5.3655481" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_20">
+        <Position X="25.543472" Y="38.859741" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_21">
+        <Position X="12.032188" Y="31.792404" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_22">
+        <Position X="4.1183619" Y="38.512192" Z="32.539215"/>
+    </Point>
+    <Point Name="TopFinPoint_23">
+        <Position X="-2.5684056" Y="33.621338" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_24">
+        <Position X="-5.2616405" Y="24.606369" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_25">
+        <Position X="-10.730381" Y="31.484837" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_26">
+        <Position X="-18.998316" Y="28.395943" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_27">
+        <Position X="-22.654198" Y="29.21299" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_28">
+        <Position X="-25.431774" Y="10.59692" Z="32.539223"/>
+    </Point>
+    <Point Name="TopFinPoint_29">
+        <Position X="-28.338688" Y="5.3655539" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_30">
+        <Position X="25.543457" Y="38.859756" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_31">
+        <Position X="11.032219" Y="39.383049" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_32">
+        <Position X="3.5842052" Y="47.971092" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_33">
+        <Position X="-3.1025472" Y="43.080101" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_34">
+        <Position X="-7.3011112" Y="39.806152" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_35">
+        <Position X="-11.264511" Y="40.943771" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_36">
+        <Position X="-18.837654" Y="40.641701" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_37">
+        <Position X="-23.188332" Y="38.671982" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_38">
+        <Position X="-25.966022" Y="20.055801" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_39">
+        <Position X="-28.33868" Y="5.3655558" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_40">
+        <Position X="25.543854" Y="38.856827" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_41">
+        <Position X="11.552944" Y="30.160671" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_42">
+        <Position X="3.866859" Y="22.132088" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_43">
+        <Position X="-1.9009254" Y="21.797092" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_44">
+        <Position X="-4.994483" Y="19.873943" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_45">
+        <Position X="-9.2992153" Y="17.198042" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_46">
+        <Position X="-17.235092" Y="12.265028" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_47">
+        <Position X="-21.545689" Y="9.5853958" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_48">
+        <Position X="-25.244701" Y="7.2858171" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_49">
+        <Position X="-28.338589" Y="5.36551" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_50">
+        <Position X="25.543243" Y="38.859795" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_51">
+        <Position X="11.018837" Y="39.61908" Z="1.0896301"/>
+    </Point>
+    <Point Name="TopFinPoint_52">
+        <Position X="4.2920489" Y="35.437958" Z="-2.5391655"/>
+    </Point>
+    <Point Name="TopFinPoint_53">
+        <Position X="-2.4349217" Y="31.256184" Z="-2.5391731"/>
+    </Point>
+    <Point Name="TopFinPoint_54">
+        <Position X="-5.3778825" Y="26.459854" Z="-2.5391655"/>
+    </Point>
+    <Point Name="TopFinPoint_55">
+        <Position X="-10.436539" Y="26.281956" Z="-2.5391693"/>
+    </Point>
+    <Point Name="TopFinPoint_56">
+        <Position X="-17.769363" Y="21.723606" Z="-2.5391731"/>
+    </Point>
+    <Point Name="TopFinPoint_57">
+        <Position X="-22.079861" Y="19.044102" Z="-2.5391693"/>
+    </Point>
+    <Point Name="TopFinPoint_58">
+        <Position X="-25.779011" Y="16.744818" Z="-2.5391731"/>
+    </Point>
+    <Point Name="TopFinPoint_59">
+        <Position X="-28.33868" Y="5.3655481" Z="15.000029"/>
+    </Point>
+    <Point Name="TopFinPoint_60">
+        <Position X="25.543465" Y="38.859749" Z="15.000031"/>
+    </Point>
+    <Point Name="TopFinPoint_61">
+        <Position X="12.032192" Y="31.792404" Z="-2.5391579"/>
+    </Point>
+    <Point Name="TopFinPoint_62">
+        <Position X="4.1183734" Y="38.512192" Z="-2.5391426"/>
+    </Point>
+    <Point Name="TopFinPoint_63">
+        <Position X="-2.5684056" Y="33.621338" Z="-2.5391655"/>
+    </Point>
+    <Point Name="TopFinPoint_64">
+        <Position X="-5.2616405" Y="24.606365" Z="-2.5391655"/>
+    </Point>
+    <Point Name="TopFinPoint_65">
+        <Position X="-10.730389" Y="31.484837" Z="-2.5391693"/>
+    </Point>
+    <Point Name="TopFinPoint_66">
+        <Position X="-18.998316" Y="28.395943" Z="-2.5391769"/>
+    </Point>
+    <Point Name="TopFinPoint_67">
+        <Position X="-22.65419" Y="29.21299" Z="-2.5391769"/>
+    </Point>
+    <Point Name="TopFinPoint_68">
+        <Position X="-25.431782" Y="10.596922" Z="-2.5391693"/>
+    </Point>
+    <Point Name="TopFinPoint_69">
+        <Position X="-28.338688" Y="5.3655519" Z="15.000029"/>
+    </Point>
+    <Point Name="BottomFinPoint_0">
+        <Position X="-23.662331" Y="-17.015049" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_1">
+        <Position X="-12.835909" Y="-20.98481" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_2">
+        <Position X="-5.0948696" Y="-21.764484" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_3">
+        <Position X="-2.4243817" Y="-24.801659" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_4">
+        <Position X="-0.030352116" Y="-25.679279" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_5">
+        <Position X="3.3008838" Y="-26.900585" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_6">
+        <Position X="9.4420338" Y="-29.152126" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_7">
+        <Position X="12.777857" Y="-30.375061" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_8">
+        <Position X="15.640457" Y="-31.424427" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_9">
+        <Position X="18.033077" Y="-32.303467" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_10">
+        <Position X="-23.663712" Y="-17.016666" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_11">
+        <Position X="-17.823059" Y="-25.355625" Z="21.955229"/>
+    </Point>
+    <Point Name="BottomFinPoint_12">
+        <Position X="-12.617718" Y="-27.264275" Z="23.769629"/>
+    </Point>
+    <Point Name="BottomFinPoint_13">
+        <Position X="-7.4119587" Y="-29.172726" Z="23.769627"/>
+    </Point>
+    <Point Name="BottomFinPoint_14">
+        <Position X="-3.4979579" Y="-28.729046" Z="23.769627"/>
+    </Point>
+    <Point Name="BottomFinPoint_15">
+        <Position X="-1.2197349" Y="-31.442774" Z="23.769627"/>
+    </Point>
+    <Point Name="BottomFinPoint_16">
+        <Position X="4.4548602" Y="-33.523148" Z="23.769627"/>
+    </Point>
+    <Point Name="BottomFinPoint_17">
+        <Position X="7.7905574" Y="-34.746086" Z="23.769627"/>
+    </Point>
+    <Point Name="BottomFinPoint_18">
+        <Position X="10.653067" Y="-35.79567" Z="23.769627"/>
+    </Point>
+    <Point Name="BottomFinPoint_19">
+        <Position X="18.033085" Y="-32.303543" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_20">
+        <Position X="-23.663765" Y="-17.016521" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_21">
+        <Position X="-13.942524" Y="-21.423656" Z="23.76963"/>
+    </Point>
+    <Point Name="BottomFinPoint_22">
+        <Position X="-14.238651" Y="-28.684956" Z="23.769621"/>
+    </Point>
+    <Point Name="BottomFinPoint_23">
+        <Position X="-8.6590633" Y="-30.265654" Z="23.769627"/>
+    </Point>
+    <Point Name="BottomFinPoint_24">
+        <Position X="-2.5256524" Y="-27.86615" Z="23.769627"/>
+    </Point>
+    <Point Name="BottomFinPoint_25">
+        <Position X="-3.963042" Y="-33.84713" Z="23.769625"/>
+    </Point>
+    <Point Name="BottomFinPoint_26">
+        <Position X="1.3039813" Y="-37.076591" Z="23.769625"/>
+    </Point>
+    <Point Name="BottomFinPoint_27">
+        <Position X="2.4288449" Y="-39.44532" Z="23.769625"/>
+    </Point>
+    <Point Name="BottomFinPoint_28">
+        <Position X="13.894653" Y="-32.954605" Z="23.769627"/>
+    </Point>
+    <Point Name="BottomFinPoint_29">
+        <Position X="18.033085" Y="-32.303543" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_30">
+        <Position X="-23.663773" Y="-17.016521" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_31">
+        <Position X="-17.698631" Y="-25.246532" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_32">
+        <Position X="-19.226053" Y="-33.056053" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_33">
+        <Position X="-13.646393" Y="-34.636688" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_34">
+        <Position X="-10.03104" Y="-35.541702" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_35">
+        <Position X="-8.9504757" Y="-38.218208" Z="15.000027"/>
+    </Point>
+    <Point Name="BottomFinPoint_36">
+        <Position X="-5.5201035" Y="-42.265411" Z="15.000027"/>
+    </Point>
+    <Point Name="BottomFinPoint_37">
+        <Position X="-2.5586171" Y="-43.816406" Z="15.000027"/>
+    </Point>
+    <Point Name="BottomFinPoint_38">
+        <Position X="8.9072876" Y="-37.325729" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_39">
+        <Position X="18.033077" Y="-32.303543" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_40">
+        <Position X="-23.662331" Y="-17.015041" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_41">
+        <Position X="-12.835909" Y="-20.98481" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_42">
+        <Position X="-5.0948696" Y="-21.764484" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_43">
+        <Position X="-2.4243817" Y="-24.801666" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_44">
+        <Position X="-0.030352116" Y="-25.679287" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_45">
+        <Position X="3.3008761" Y="-26.900593" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_46">
+        <Position X="9.4420395" Y="-29.152134" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_47">
+        <Position X="12.777861" Y="-30.375069" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_48">
+        <Position X="15.64045" Y="-31.424442" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_49">
+        <Position X="18.033054" Y="-32.30349" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_50">
+        <Position X="-23.663704" Y="-17.016655" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_51">
+        <Position X="-17.823059" Y="-25.35564" Z="8.0448303"/>
+    </Point>
+    <Point Name="BottomFinPoint_52">
+        <Position X="-12.617718" Y="-27.264282" Z="6.2304306"/>
+    </Point>
+    <Point Name="BottomFinPoint_53">
+        <Position X="-7.4119587" Y="-29.172726" Z="6.2304306"/>
+    </Point>
+    <Point Name="BottomFinPoint_54">
+        <Position X="-3.497956" Y="-28.729046" Z="6.2304306"/>
+    </Point>
+    <Point Name="BottomFinPoint_55">
+        <Position X="-1.2197368" Y="-31.442774" Z="6.2304268"/>
+    </Point>
+    <Point Name="BottomFinPoint_56">
+        <Position X="4.454864" Y="-33.523163" Z="6.2304268"/>
+    </Point>
+    <Point Name="BottomFinPoint_57">
+        <Position X="7.7905593" Y="-34.746101" Z="6.2304268"/>
+    </Point>
+    <Point Name="BottomFinPoint_58">
+        <Position X="10.653061" Y="-35.795677" Z="6.2304268"/>
+    </Point>
+    <Point Name="BottomFinPoint_59">
+        <Position X="18.033077" Y="-32.303558" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_60">
+        <Position X="-23.663773" Y="-17.016514" Z="15.000031"/>
+    </Point>
+    <Point Name="BottomFinPoint_61">
+        <Position X="-13.942524" Y="-21.423664" Z="6.2304306"/>
+    </Point>
+    <Point Name="BottomFinPoint_62">
+        <Position X="-14.238659" Y="-28.684956" Z="6.2304382"/>
+    </Point>
+    <Point Name="BottomFinPoint_63">
+        <Position X="-8.6590672" Y="-30.265646" Z="6.2304306"/>
+    </Point>
+    <Point Name="BottomFinPoint_64">
+        <Position X="-2.5256524" Y="-27.866158" Z="6.2304268"/>
+    </Point>
+    <Point Name="BottomFinPoint_65">
+        <Position X="-3.9630439" Y="-33.847137" Z="6.2304306"/>
+    </Point>
+    <Point Name="BottomFinPoint_66">
+        <Position X="1.3039818" Y="-37.076591" Z="6.2304268"/>
+    </Point>
+    <Point Name="BottomFinPoint_67">
+        <Position X="2.428844" Y="-39.445313" Z="6.2304268"/>
+    </Point>
+    <Point Name="BottomFinPoint_68">
+        <Position X="13.894646" Y="-32.95462" Z="6.2304268"/>
+    </Point>
+    <Point Name="BottomFinPoint_69">
+        <Position X="18.033085" Y="-32.303551" Z="15.000031"/>
+    </Point>
+    <PatchC0 Name="TopFin" ShowControlPolygon="false" RowSlices="5" ColumnSlices="5" WrapDirection="None">
+        <Points>
+            <PointRef Name="TopFinPoint_0" Row="0" Column="0"/>
+            <PointRef Name="TopFinPoint_1" Row="0" Column="1"/>
+            <PointRef Name="TopFinPoint_2" Row="0" Column="2"/>
+            <PointRef Name="TopFinPoint_3" Row="0" Column="3"/>
+            <PointRef Name="TopFinPoint_4" Row="0" Column="4"/>
+            <PointRef Name="TopFinPoint_5" Row="0" Column="5"/>
+            <PointRef Name="TopFinPoint_6" Row="0" Column="6"/>
+            <PointRef Name="TopFinPoint_7" Row="0" Column="7"/>
+            <PointRef Name="TopFinPoint_8" Row="0" Column="8"/>
+            <PointRef Name="TopFinPoint_9" Row="0" Column="9"/>
+            <PointRef Name="TopFinPoint_10" Row="1" Column="0"/>
+            <PointRef Name="TopFinPoint_11" Row="1" Column="1"/>
+            <PointRef Name="TopFinPoint_12" Row="1" Column="2"/>
+            <PointRef Name="TopFinPoint_13" Row="1" Column="3"/>
+            <PointRef Name="TopFinPoint_14" Row="1" Column="4"/>
+            <PointRef Name="TopFinPoint_15" Row="1" Column="5"/>
+            <PointRef Name="TopFinPoint_16" Row="1" Column="6"/>
+            <PointRef Name="TopFinPoint_17" Row="1" Column="7"/>
+            <PointRef Name="TopFinPoint_18" Row="1" Column="8"/>
+            <PointRef Name="TopFinPoint_19" Row="1" Column="9"/>
+            <PointRef Name="TopFinPoint_20" Row="2" Column="0"/>
+            <PointRef Name="TopFinPoint_21" Row="2" Column="1"/>
+            <PointRef Name="TopFinPoint_22" Row="2" Column="2"/>
+            <PointRef Name="TopFinPoint_23" Row="2" Column="3"/>
+            <PointRef Name="TopFinPoint_24" Row="2" Column="4"/>
+            <PointRef Name="TopFinPoint_25" Row="2" Column="5"/>
+            <PointRef Name="TopFinPoint_26" Row="2" Column="6"/>
+            <PointRef Name="TopFinPoint_27" Row="2" Column="7"/>
+            <PointRef Name="TopFinPoint_28" Row="2" Column="8"/>
+            <PointRef Name="TopFinPoint_29" Row="2" Column="9"/>
+            <PointRef Name="TopFinPoint_30" Row="3" Column="0"/>
+            <PointRef Name="TopFinPoint_31" Row="3" Column="1"/>
+            <PointRef Name="TopFinPoint_32" Row="3" Column="2"/>
+            <PointRef Name="TopFinPoint_33" Row="3" Column="3"/>
+            <PointRef Name="TopFinPoint_34" Row="3" Column="4"/>
+            <PointRef Name="TopFinPoint_35" Row="3" Column="5"/>
+            <PointRef Name="TopFinPoint_36" Row="3" Column="6"/>
+            <PointRef Name="TopFinPoint_37" Row="3" Column="7"/>
+            <PointRef Name="TopFinPoint_38" Row="3" Column="8"/>
+            <PointRef Name="TopFinPoint_39" Row="3" Column="9"/>
+            <PointRef Name="TopFinPoint_60" Row="4" Column="0"/>
+            <PointRef Name="TopFinPoint_61" Row="4" Column="1"/>
+            <PointRef Name="TopFinPoint_62" Row="4" Column="2"/>
+            <PointRef Name="TopFinPoint_63" Row="4" Column="3"/>
+            <PointRef Name="TopFinPoint_64" Row="4" Column="4"/>
+            <PointRef Name="TopFinPoint_65" Row="4" Column="5"/>
+            <PointRef Name="TopFinPoint_66" Row="4" Column="6"/>
+            <PointRef Name="TopFinPoint_67" Row="4" Column="7"/>
+            <PointRef Name="TopFinPoint_68" Row="4" Column="8"/>
+            <PointRef Name="TopFinPoint_69" Row="4" Column="9"/>
+            <PointRef Name="TopFinPoint_50" Row="5" Column="0"/>
+            <PointRef Name="TopFinPoint_51" Row="5" Column="1"/>
+            <PointRef Name="TopFinPoint_52" Row="5" Column="2"/>
+            <PointRef Name="TopFinPoint_53" Row="5" Column="3"/>
+            <PointRef Name="TopFinPoint_54" Row="5" Column="4"/>
+            <PointRef Name="TopFinPoint_55" Row="5" Column="5"/>
+            <PointRef Name="TopFinPoint_56" Row="5" Column="6"/>
+            <PointRef Name="TopFinPoint_57" Row="5" Column="7"/>
+            <PointRef Name="TopFinPoint_58" Row="5" Column="8"/>
+            <PointRef Name="TopFinPoint_59" Row="5" Column="9"/>
+            <PointRef Name="TopFinPoint_40" Row="6" Column="0"/>
+            <PointRef Name="TopFinPoint_41" Row="6" Column="1"/>
+            <PointRef Name="TopFinPoint_42" Row="6" Column="2"/>
+            <PointRef Name="TopFinPoint_43" Row="6" Column="3"/>
+            <PointRef Name="TopFinPoint_44" Row="6" Column="4"/>
+            <PointRef Name="TopFinPoint_45" Row="6" Column="5"/>
+            <PointRef Name="TopFinPoint_46" Row="6" Column="6"/>
+            <PointRef Name="TopFinPoint_47" Row="6" Column="7"/>
+            <PointRef Name="TopFinPoint_48" Row="6" Column="8"/>
+            <PointRef Name="TopFinPoint_49" Row="6" Column="9"/>
+        </Points>
+    </PatchC0>
+    <PatchC0 Name="BottomFin" ShowControlPolygon="false" RowSlices="5" ColumnSlices="5" WrapDirection="None">
+        <Points>
+            <PointRef Name="BottomFinPoint_0" Row="0" Column="0"/>
+            <PointRef Name="BottomFinPoint_1" Row="0" Column="1"/>
+            <PointRef Name="BottomFinPoint_2" Row="0" Column="2"/>
+            <PointRef Name="BottomFinPoint_3" Row="0" Column="3"/>
+            <PointRef Name="BottomFinPoint_4" Row="0" Column="4"/>
+            <PointRef Name="BottomFinPoint_5" Row="0" Column="5"/>
+            <PointRef Name="BottomFinPoint_6" Row="0" Column="6"/>
+            <PointRef Name="BottomFinPoint_7" Row="0" Column="7"/>
+            <PointRef Name="BottomFinPoint_8" Row="0" Column="8"/>
+            <PointRef Name="BottomFinPoint_9" Row="0" Column="9"/>
+            <PointRef Name="BottomFinPoint_10" Row="1" Column="0"/>
+            <PointRef Name="BottomFinPoint_11" Row="1" Column="1"/>
+            <PointRef Name="BottomFinPoint_12" Row="1" Column="2"/>
+            <PointRef Name="BottomFinPoint_13" Row="1" Column="3"/>
+            <PointRef Name="BottomFinPoint_14" Row="1" Column="4"/>
+            <PointRef Name="BottomFinPoint_15" Row="1" Column="5"/>
+            <PointRef Name="BottomFinPoint_16" Row="1" Column="6"/>
+            <PointRef Name="BottomFinPoint_17" Row="1" Column="7"/>
+            <PointRef Name="BottomFinPoint_18" Row="1" Column="8"/>
+            <PointRef Name="BottomFinPoint_19" Row="1" Column="9"/>
+            <PointRef Name="BottomFinPoint_20" Row="2" Column="0"/>
+            <PointRef Name="BottomFinPoint_21" Row="2" Column="1"/>
+            <PointRef Name="BottomFinPoint_22" Row="2" Column="2"/>
+            <PointRef Name="BottomFinPoint_23" Row="2" Column="3"/>
+            <PointRef Name="BottomFinPoint_24" Row="2" Column="4"/>
+            <PointRef Name="BottomFinPoint_25" Row="2" Column="5"/>
+            <PointRef Name="BottomFinPoint_26" Row="2" Column="6"/>
+            <PointRef Name="BottomFinPoint_27" Row="2" Column="7"/>
+            <PointRef Name="BottomFinPoint_28" Row="2" Column="8"/>
+            <PointRef Name="BottomFinPoint_29" Row="2" Column="9"/>
+            <PointRef Name="BottomFinPoint_30" Row="3" Column="0"/>
+            <PointRef Name="BottomFinPoint_31" Row="3" Column="1"/>
+            <PointRef Name="BottomFinPoint_32" Row="3" Column="2"/>
+            <PointRef Name="BottomFinPoint_33" Row="3" Column="3"/>
+            <PointRef Name="BottomFinPoint_34" Row="3" Column="4"/>
+            <PointRef Name="BottomFinPoint_35" Row="3" Column="5"/>
+            <PointRef Name="BottomFinPoint_36" Row="3" Column="6"/>
+            <PointRef Name="BottomFinPoint_37" Row="3" Column="7"/>
+            <PointRef Name="BottomFinPoint_38" Row="3" Column="8"/>
+            <PointRef Name="BottomFinPoint_39" Row="3" Column="9"/>
+            <PointRef Name="BottomFinPoint_60" Row="4" Column="0"/>
+            <PointRef Name="BottomFinPoint_61" Row="4" Column="1"/>
+            <PointRef Name="BottomFinPoint_62" Row="4" Column="2"/>
+            <PointRef Name="BottomFinPoint_63" Row="4" Column="3"/>
+            <PointRef Name="BottomFinPoint_64" Row="4" Column="4"/>
+            <PointRef Name="BottomFinPoint_65" Row="4" Column="5"/>
+            <PointRef Name="BottomFinPoint_66" Row="4" Column="6"/>
+            <PointRef Name="BottomFinPoint_67" Row="4" Column="7"/>
+            <PointRef Name="BottomFinPoint_68" Row="4" Column="8"/>
+            <PointRef Name="BottomFinPoint_69" Row="4" Column="9"/>
+            <PointRef Name="BottomFinPoint_50" Row="5" Column="0"/>
+            <PointRef Name="BottomFinPoint_51" Row="5" Column="1"/>
+            <PointRef Name="BottomFinPoint_52" Row="5" Column="2"/>
+            <PointRef Name="BottomFinPoint_53" Row="5" Column="3"/>
+            <PointRef Name="BottomFinPoint_54" Row="5" Column="4"/>
+            <PointRef Name="BottomFinPoint_55" Row="5" Column="5"/>
+            <PointRef Name="BottomFinPoint_56" Row="5" Column="6"/>
+            <PointRef Name="BottomFinPoint_57" Row="5" Column="7"/>
+            <PointRef Name="BottomFinPoint_58" Row="5" Column="8"/>
+            <PointRef Name="BottomFinPoint_59" Row="5" Column="9"/>
+            <PointRef Name="BottomFinPoint_40" Row="6" Column="0"/>
+            <PointRef Name="BottomFinPoint_41" Row="6" Column="1"/>
+            <PointRef Name="BottomFinPoint_42" Row="6" Column="2"/>
+            <PointRef Name="BottomFinPoint_43" Row="6" Column="3"/>
+            <PointRef Name="BottomFinPoint_44" Row="6" Column="4"/>
+            <PointRef Name="BottomFinPoint_45" Row="6" Column="5"/>
+            <PointRef Name="BottomFinPoint_46" Row="6" Column="6"/>
+            <PointRef Name="BottomFinPoint_47" Row="6" Column="7"/>
+            <PointRef Name="BottomFinPoint_48" Row="6" Column="8"/>
+            <PointRef Name="BottomFinPoint_49" Row="6" Column="9"/>
+        </Points>
+    </PatchC0>
+    <PatchC2 Name="Body" ShowControlPolygon="false" ColumnSlices="5" RowSlices="5" WrapDirection="Column">
+        <Points>
+            <PointRef Name="KorpusPoint_0" Row="0" Column="0"/>
+            <PointRef Name="KorpusPoint_1" Row="0" Column="1"/>
+            <PointRef Name="KorpusPoint_2" Row="0" Column="2"/>
+            <PointRef Name="KorpusPoint_3" Row="0" Column="3"/>
+            <PointRef Name="KorpusPoint_4" Row="0" Column="4"/>
+            <PointRef Name="KorpusPoint_5" Row="0" Column="5"/>
+            <PointRef Name="KorpusPoint_6" Row="1" Column="0"/>
+            <PointRef Name="KorpusPoint_7" Row="1" Column="1"/>
+            <PointRef Name="KorpusPoint_8" Row="1" Column="2"/>
+            <PointRef Name="KorpusPoint_9" Row="1" Column="3"/>
+            <PointRef Name="KorpusPoint_10" Row="1" Column="4"/>
+            <PointRef Name="KorpusPoint_11" Row="1" Column="5"/>
+            <PointRef Name="KorpusPoint_12" Row="2" Column="0"/>
+            <PointRef Name="KorpusPoint_13" Row="2" Column="1"/>
+            <PointRef Name="KorpusPoint_14" Row="2" Column="2"/>
+            <PointRef Name="KorpusPoint_15" Row="2" Column="3"/>
+            <PointRef Name="KorpusPoint_16" Row="2" Column="4"/>
+            <PointRef Name="KorpusPoint_17" Row="2" Column="5"/>
+            <PointRef Name="KorpusPoint_18" Row="3" Column="0"/>
+            <PointRef Name="KorpusPoint_19" Row="3" Column="1"/>
+            <PointRef Name="KorpusPoint_20" Row="3" Column="2"/>
+            <PointRef Name="KorpusPoint_21" Row="3" Column="3"/>
+            <PointRef Name="KorpusPoint_22" Row="3" Column="4"/>
+            <PointRef Name="KorpusPoint_23" Row="3" Column="5"/>
+            <PointRef Name="KorpusPoint_24" Row="4" Column="0"/>
+            <PointRef Name="KorpusPoint_25" Row="4" Column="1"/>
+            <PointRef Name="KorpusPoint_26" Row="4" Column="2"/>
+            <PointRef Name="KorpusPoint_27" Row="4" Column="3"/>
+            <PointRef Name="KorpusPoint_28" Row="4" Column="4"/>
+            <PointRef Name="KorpusPoint_29" Row="4" Column="5"/>
+            <PointRef Name="KorpusPoint_30" Row="5" Column="0"/>
+            <PointRef Name="KorpusPoint_31" Row="5" Column="1"/>
+            <PointRef Name="KorpusPoint_32" Row="5" Column="2"/>
+            <PointRef Name="KorpusPoint_33" Row="5" Column="3"/>
+            <PointRef Name="KorpusPoint_34" Row="5" Column="4"/>
+            <PointRef Name="KorpusPoint_35" Row="5" Column="5"/>
+            <PointRef Name="KorpusPoint_36" Row="6" Column="0"/>
+            <PointRef Name="KorpusPoint_37" Row="6" Column="1"/>
+            <PointRef Name="KorpusPoint_38" Row="6" Column="2"/>
+            <PointRef Name="KorpusPoint_39" Row="6" Column="3"/>
+            <PointRef Name="KorpusPoint_40" Row="6" Column="4"/>
+            <PointRef Name="KorpusPoint_41" Row="6" Column="5"/>
+        </Points>
+    </PatchC2>
+    <PatchC2 Name="Loop" ShowControlPolygon="false" ColumnSlices="5" RowSlices="5" WrapDirection="Column">
+        <Points>
+            <PointRef Name="LoopPoint_0" Row="0" Column="0"/>
+            <PointRef Name="LoopPoint_1" Row="0" Column="1"/>
+            <PointRef Name="LoopPoint_2" Row="0" Column="2"/>
+            <PointRef Name="LoopPoint_3" Row="0" Column="3"/>
+            <PointRef Name="LoopPoint_4" Row="1" Column="0"/>
+            <PointRef Name="LoopPoint_5" Row="1" Column="1"/>
+            <PointRef Name="LoopPoint_6" Row="1" Column="2"/>
+            <PointRef Name="LoopPoint_7" Row="1" Column="3"/>
+            <PointRef Name="LoopPoint_8" Row="2" Column="0"/>
+            <PointRef Name="LoopPoint_9" Row="2" Column="1"/>
+            <PointRef Name="LoopPoint_10" Row="2" Column="2"/>
+            <PointRef Name="LoopPoint_11" Row="2" Column="3"/>
+            <PointRef Name="LoopPoint_12" Row="3" Column="0"/>
+            <PointRef Name="LoopPoint_13" Row="3" Column="1"/>
+            <PointRef Name="LoopPoint_14" Row="3" Column="2"/>
+            <PointRef Name="LoopPoint_15" Row="3" Column="3"/>
+            <PointRef Name="LoopPoint_16" Row="4" Column="0"/>
+            <PointRef Name="LoopPoint_17" Row="4" Column="1"/>
+            <PointRef Name="LoopPoint_18" Row="4" Column="2"/>
+            <PointRef Name="LoopPoint_19" Row="4" Column="3"/>
+            <PointRef Name="LoopPoint_20" Row="5" Column="0"/>
+            <PointRef Name="LoopPoint_21" Row="5" Column="1"/>
+            <PointRef Name="LoopPoint_22" Row="5" Column="2"/>
+            <PointRef Name="LoopPoint_23" Row="5" Column="3"/>
+            <PointRef Name="LoopPoint_24" Row="6" Column="0"/>
+            <PointRef Name="LoopPoint_25" Row="6" Column="1"/>
+            <PointRef Name="LoopPoint_26" Row="6" Column="2"/>
+            <PointRef Name="LoopPoint_27" Row="6" Column="3"/>
+        </Points>
+    </PatchC2>
+    <PatchC2 Name="Tail" ShowControlPolygon="false" ColumnSlices="5" RowSlices="5" WrapDirection="Column">
+        <Points>
+            <PointRef Name="TailPoint_0" Row="0" Column="0"/>
+            <PointRef Name="TailPoint_1" Row="0" Column="1"/>
+            <PointRef Name="TailPoint_2" Row="0" Column="2"/>
+            <PointRef Name="TailPoint_3" Row="0" Column="3"/>
+            <PointRef Name="TailPoint_4" Row="0" Column="4"/>
+            <PointRef Name="TailPoint_5" Row="0" Column="5"/>
+            <PointRef Name="TailPoint_6" Row="1" Column="0"/>
+            <PointRef Name="TailPoint_7" Row="1" Column="1"/>
+            <PointRef Name="TailPoint_8" Row="1" Column="2"/>
+            <PointRef Name="TailPoint_9" Row="1" Column="3"/>
+            <PointRef Name="TailPoint_10" Row="1" Column="4"/>
+            <PointRef Name="TailPoint_11" Row="1" Column="5"/>
+            <PointRef Name="TailPoint_12" Row="2" Column="0"/>
+            <PointRef Name="TailPoint_13" Row="2" Column="1"/>
+            <PointRef Name="TailPoint_14" Row="2" Column="2"/>
+            <PointRef Name="TailPoint_15" Row="2" Column="3"/>
+            <PointRef Name="TailPoint_16" Row="2" Column="4"/>
+            <PointRef Name="TailPoint_17" Row="2" Column="5"/>
+            <PointRef Name="TailPoint_18" Row="3" Column="0"/>
+            <PointRef Name="TailPoint_19" Row="3" Column="1"/>
+            <PointRef Name="TailPoint_20" Row="3" Column="2"/>
+            <PointRef Name="TailPoint_21" Row="3" Column="3"/>
+            <PointRef Name="TailPoint_22" Row="3" Column="4"/>
+            <PointRef Name="TailPoint_23" Row="3" Column="5"/>
+            <PointRef Name="TailPoint_24" Row="4" Column="0"/>
+            <PointRef Name="TailPoint_25" Row="4" Column="1"/>
+            <PointRef Name="TailPoint_26" Row="4" Column="2"/>
+            <PointRef Name="TailPoint_27" Row="4" Column="3"/>
+            <PointRef Name="TailPoint_28" Row="4" Column="4"/>
+            <PointRef Name="TailPoint_29" Row="4" Column="5"/>
+            <PointRef Name="TailPoint_30" Row="5" Column="0"/>
+            <PointRef Name="TailPoint_31" Row="5" Column="1"/>
+            <PointRef Name="TailPoint_32" Row="5" Column="2"/>
+            <PointRef Name="TailPoint_33" Row="5" Column="3"/>
+            <PointRef Name="TailPoint_34" Row="5" Column="4"/>
+            <PointRef Name="TailPoint_35" Row="5" Column="5"/>
+            <PointRef Name="TailPoint_36" Row="6" Column="0"/>
+            <PointRef Name="TailPoint_37" Row="6" Column="1"/>
+            <PointRef Name="TailPoint_38" Row="6" Column="2"/>
+            <PointRef Name="TailPoint_39" Row="6" Column="3"/>
+            <PointRef Name="TailPoint_40" Row="6" Column="4"/>
+            <PointRef Name="TailPoint_41" Row="6" Column="5"/>
+            <PointRef Name="TailPoint_42" Row="7" Column="0"/>
+            <PointRef Name="TailPoint_43" Row="7" Column="1"/>
+            <PointRef Name="TailPoint_44" Row="7" Column="2"/>
+            <PointRef Name="TailPoint_45" Row="7" Column="3"/>
+            <PointRef Name="TailPoint_46" Row="7" Column="4"/>
+            <PointRef Name="TailPoint_47" Row="7" Column="5"/>
+            <PointRef Name="TailPoint_48" Row="8" Column="0"/>
+            <PointRef Name="TailPoint_49" Row="8" Column="1"/>
+            <PointRef Name="TailPoint_50" Row="8" Column="2"/>
+            <PointRef Name="TailPoint_51" Row="8" Column="3"/>
+            <PointRef Name="TailPoint_52" Row="8" Column="4"/>
+            <PointRef Name="TailPoint_53" Row="8" Column="5"/>
+        </Points>
+    </PatchC2>
+</Scene>
